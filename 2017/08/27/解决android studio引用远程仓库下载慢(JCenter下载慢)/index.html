@@ -291,7 +291,7 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
 
     
@@ -471,23 +471,27 @@
     
         <h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><p>使用开源中国的maven库<a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="external">阿里云的(速度巨快)</a></p>
 <p><strong>替换项目根目录下build.gradle中</strong></p>
-<pre><code>repositories {
-      jcenter()
-}
-</code></pre><p>改为</p>
-<pre><code>repositories {
-      maven{url &apos;http://maven.aliyun.com/nexus/content/groups/public/&apos;}
-}
-</code></pre><h2 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h2><p>修改https为 http协议下载（<a href="http://jcenter/bintray.com/）" target="_blank" rel="external">http://jcenter/bintray.com/）</a></p>
-<p>  <strong>替换项目根目录下build.gradle中</strong></p>
-<pre><code>repositories {
-      jcenter()
-}
-</code></pre><p>改为</p>
-<pre><code>repositories {
-    jcenter(){ url &apos;http://jcenter.bintray.com/&apos;}
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    jcenter()
 }
 </code></pre>
+<p>改为</p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+}
+</code></pre>
+<h2 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h2><p>修改https为 http协议下载（<a href="http://jcenter/bintray.com/）" target="_blank" rel="external">http://jcenter/bintray.com/）</a></p>
+<p><strong>替换项目根目录下build.gradle中</strong></p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    jcenter()
+}
+</code></pre>
+<p>改为</p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    jcenter(){ url 'http://jcenter.bintray.com/'}
+}
+</code></pre>
+
     
 
     
