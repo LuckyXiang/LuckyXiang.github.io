@@ -198,12 +198,12 @@
 <!-- Theme Background Related-->
 
     <style>
-      body{
+      body {
         background-color: #F5F5F5;
       }
 
       /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
         background-color: #fff;
       }
     </style>
@@ -308,7 +308,7 @@
         <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
             <!-- Author Avatar -->
             <div id="author-avatar">
-                <img src="/img/avatar.jpg" width="44px" height="44px" alt="LuckyXiang's avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="LuckyXiang's avatar">
             </div>
             <div>
                 <strong>LuckyXiang</strong>
@@ -318,7 +318,7 @@
         <div id="post_entry-right-info">
             <!-- Category -->
             <span class="post_entry-category">
-                
+                <a class="post_category-link" href="/categories/技术项/">技术项</a>
             </span>
 
             
@@ -382,7 +382,7 @@
 
     <!-- Sidebar Avatar -->
     <div class="sidebar-image">
-        <img src="/img/avatar.jpg" alt="LuckyXiang's avatar">
+        <img src="/img/avatar.png" alt="LuckyXiang's avatar">
     </div>
 
     <!-- Sidebar Email -->
@@ -400,7 +400,7 @@
         <ul id="settings-dropdown" class="dropdown-menu">
             
                 <li>
-                    <a href="#" target="_blank" title="Email Me">
+                    <a href="mailto: 997791972@qq.com" target="_blank" title="Email Me">
                         
                             <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
                         
@@ -454,13 +454,27 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                
+                <a class="sidebar_archives-link" href="/categories/技术项/">技术项<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
+        
+            <li class="divider"></li>
         
     
 
     <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
     
 
     <!-- Article Number  -->
@@ -577,7 +591,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
         <!--Copyright-->
         <div id="copyright">
-            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>LuckyXiang
+            Copyright&nbsp;©&nbsp;2016&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>LuckyXiang
         </div>
 
         <!-- Paradox Footer Right Section -->
@@ -680,6 +694,12 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 <!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
 
 
 <script>

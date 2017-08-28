@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="LuckyXiang">
     <meta name="description" itemprop="description" content="任祥的博客">
-    <meta name="keywords" content="">
+    <meta name="keywords" content=",技术">
 
     <!-- Site Verification -->
     
@@ -68,11 +68,11 @@
     <meta property="og:title" content="解决Android Studio引用远程仓库(JCenter)下载慢 | LuckyXiang">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="任祥的博客">
-    
+    <meta property="og:article:tag" content="技术"> 
 
     
         <meta property="article:published_time" content="8月 27, 2017" />
-        <meta property="article:modified_time" content="8月 27, 2017" />
+        <meta property="article:modified_time" content="8月 28, 2017" />
     
 
     <!-- The Twitter Card protocol -->
@@ -113,7 +113,7 @@
     "headline": "解决Android Studio引用远程仓库(JCenter)下载慢",
     "url": "http://LuckyXiang.github.io/2017/08/27/解决android studio引用远程仓库下载慢(JCenter下载慢)/index.html",
     "datePublished": "8月 27, 2017",
-    "dateModified": "8月 27, 2017",
+    "dateModified": "8月 28, 2017",
     "description": "任祥的博客",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -231,12 +231,12 @@
 <!-- Theme Background Related-->
 
     <style>
-      body{
+      body {
         background-color: #F5F5F5;
       }
 
       /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
         background-color: #fff;
       }
     </style>
@@ -379,7 +379,7 @@
 
     <!-- Author Avatar -->
     <div id="author-avatar">
-        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
     </div>
     <!-- Author Name & Date -->
     <div>
@@ -399,6 +399,17 @@
 
     <!-- Qrcode -->
     
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://LuckyXiang.github.io/2017/08/27/解决android studio引用远程仓库下载慢(JCenter下载慢)/">
+    
+</ul>
+    
 
     <!-- Tags (bookmark) -->
     
@@ -408,7 +419,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/技术/">技术</a>
     </ul>
     
 
@@ -534,7 +545,7 @@
 
     <!-- Sidebar Avatar -->
     <div class="sidebar-image">
-        <img src="/img/avatar.jpg" alt="LuckyXiang's avatar">
+        <img src="/img/avatar.png" alt="LuckyXiang's avatar">
     </div>
 
     <!-- Sidebar Email -->
@@ -552,7 +563,7 @@
         <ul id="settings-dropdown" class="dropdown-menu">
             
                 <li>
-                    <a href="#" target="_blank" title="Email Me">
+                    <a href="mailto: 997791972@qq.com" target="_blank" title="Email Me">
                         
                             <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
                         
@@ -606,13 +617,27 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                
+                <a class="sidebar_archives-link" href="/categories/技术项/">技术项<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
+        
+            <li class="divider"></li>
         
     
 
     <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
     
 
     <!-- Article Number  -->
@@ -729,7 +754,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
         <!--Copyright-->
         <div id="copyright">
-            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>LuckyXiang
+            Copyright&nbsp;©&nbsp;2016&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>LuckyXiang
         </div>
 
         <!-- Paradox Footer Right Section -->
@@ -832,6 +857,12 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 <!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
 
 
 <script>
