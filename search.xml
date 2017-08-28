@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[解决Android Studio引用远程仓库(JCenter)下载慢]]></title>
+      <url>/2017/08/27/%E8%A7%A3%E5%86%B3android%20studio%E5%BC%95%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%85%A2(JCenter%E4%B8%8B%E8%BD%BD%E6%85%A2)/</url>
+      <content type="html"><![CDATA[<h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><p>使用开源中国的maven库<a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="external">阿里云的(速度巨快)</a></p>
+<p><strong>替换项目根目录下build.gradle中</strong></p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    jcenter()
+}
+</code></pre>
+<p>改为</p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+}
+</code></pre>
+<h2 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h2><p>修改https为 http协议下载（<a href="http://jcenter/bintray.com/）" target="_blank" rel="external">http://jcenter/bintray.com/）</a></p>
+<p><strong>替换项目根目录下build.gradle中</strong></p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    jcenter()
+}
+</code></pre>
+<p>改为</p>
+<pre class=" language-gradle"><code class="language-gradle">repositories {
+    jcenter(){ url 'http://jcenter.bintray.com/'}
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术项 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+    
+    <entry>
+      <title><![CDATA[About Me]]></title>
+      <url>/about/index.html</url>
+      <content type="html"><![CDATA[<h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><p><strong>任祥</strong></p>
+]]></content>
+    </entry>
+    
+  
+</search>
