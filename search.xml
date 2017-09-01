@@ -3,29 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[MarkDown专用版破解方法]]></title>
-      <url>/2016/07/01/MarkDown%E4%B8%93%E7%94%A8%E7%89%88%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95/</url>
-      <content type="html"><![CDATA[<h1 id="MarkDown专用版破解方法"><a href="#MarkDown专用版破解方法" class="headerlink" title="MarkDown专用版破解方法"></a>MarkDown专用版破解方法</h1><p><strong>邮箱：</strong> soar360@live.com</p>
-<p><strong>授权秘钥：</strong></p>
-<p>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tools </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Tools </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[解决Android Studio引用远程仓库(JCenter)下载慢]]></title>
       <url>/2016/07/01/%E8%A7%A3%E5%86%B3android%20studio%E5%BC%95%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%85%A2(JCenter%E4%B8%8B%E8%BD%BD%E6%85%A2)/</url>
       <content type="html"><![CDATA[<h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><p>使用开源中国的maven库<a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="external">阿里云的(速度巨快)</a></p>
@@ -62,6 +39,224 @@
         <tags>
             
             <tag> Android </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MarkDown专用版破解方法]]></title>
+      <url>/2016/07/01/MarkDown%E4%B8%93%E7%94%A8%E7%89%88%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<h1 id="MarkDown专用版破解方法"><a href="#MarkDown专用版破解方法" class="headerlink" title="MarkDown专用版破解方法"></a>MarkDown专用版破解方法</h1><p><strong>邮箱：</strong> soar360@live.com</p>
+<p><strong>授权秘钥：</strong></p>
+<p>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tools </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ButterKnife使用]]></title>
+      <url>/2016/04/01/ButterKnife%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<h1 id="ButterKnife使用"><a href="#ButterKnife使用" class="headerlink" title="ButterKnife使用"></a>ButterKnife使用</h1><p><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官方网站</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>ButterKnife意为“黄油刀”，意思是此开源库可以让你的应用开发过程像用刀切黄油一样干净利落。此库的核心功能是通过注解来实现视图的注入，从而在代码中避免冗余的方法调用和丑陋的内部类监听器。<br>简单的理解“绑定”的概念，就是讲View和任意一个对象相互关联，从而在该对象中，不用<strong>findViewById</strong>就能使用View上的所有子视图，不用<strong>setOnClickListener</strong>就能给控件设置监听。</p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解(Annotation)是JDK 1.5之后引入的特性，它是一种元数据(meta-data)，即描述数据的数据。元数据这个概念比较难理解，简单的理解，就是对代码的标注，告诉编译器某一段代码需要做怎样的处理。<br>其实我们早就见过注解，在方法重写时，@Override就是一个注解，去掉@Override，代码一样可以运行，增加这个注解的好处，一是增加代码可读性，二是编译器能帮你做一些自动检查，增加代码健壮性。<br>Android引入了两个非常有用的注解，@Nullable和@NonNull，用来标识方法参数或者方法返回值等是否可以为null。以前编程时，为了避免NullPointerException，最终代码中往往到处都是if(Obj == null){…}这样的代码，这是很糟糕的编码方式，有了这两个注解，代码就清晰多了。<br>另外Android中注解的一个重要应用是代替枚举类型，这方面可以参考在Toast中的使用。</p>
+<h2 id="导入项目"><a href="#导入项目" class="headerlink" title="导入项目"></a>导入项目</h2><p>在Android Studio中使用，只需添加依赖：</p>
+<pre class=" language-java"><code class="language-java">compile <span class="token string">'com.jakewharton:butterknife:7.0.1'</span>
+</code></pre>
+<p>另外最好在build.gradle中关闭一项lint警告：</p>
+<pre class=" language-java"><code class="language-java">lintOptions <span class="token punctuation">{</span>
+  disable <span class="token string">'InvalidPackage'</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><p>ButterKnife通过@Bind注解和视图Id帮你做两件事：找到视图和将视图转型为对应的子类型。例如以下的代码：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">ExampleActivity</span> <span class="token keyword">extends</span> <span class="token class-name">Activity</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>title<span class="token punctuation">)</span> TextView title<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>subtitle<span class="token punctuation">)</span> TextView subtitle<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>footer<span class="token punctuation">)</span> TextView footer<span class="token punctuation">;</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_activity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ButterKnife<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// TODO Use fields...</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>ButterKnife不是通过反射，而是通过自动生成代码来执行View的查找，上面的例子中，ButterKnife最终自动生成的代码大概是这样的：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">bind</span><span class="token punctuation">(</span>ExampleActivity activity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  activity<span class="token punctuation">.</span>subtitle <span class="token operator">=</span> <span class="token punctuation">(</span>android<span class="token punctuation">.</span>widget<span class="token punctuation">.</span>TextView<span class="token punctuation">)</span> activity<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token number">2130968578</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  activity<span class="token punctuation">.</span>footer <span class="token operator">=</span> <span class="token punctuation">(</span>android<span class="token punctuation">.</span>widget<span class="token punctuation">.</span>TextView<span class="token punctuation">)</span> activity<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token number">2130968579</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  activity<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token punctuation">(</span>android<span class="token punctuation">.</span>widget<span class="token punctuation">.</span>TextView<span class="token punctuation">)</span> activity<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token number">2130968577</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="资源绑定"><a href="#资源绑定" class="headerlink" title="资源绑定"></a>资源绑定</h3><p>ButterKnife预定义了注解@BindBool, @BindColor, @BindDimen, @BindDrawable, @BindInt, @BindString，用来执行资源的绑定。如下所示：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">ExampleActivity</span> <span class="token keyword">extends</span> <span class="token class-name">Activity</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@BindString</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>title<span class="token punctuation">)</span> String title<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@BindDrawable</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>graphic<span class="token punctuation">)</span> Drawable graphic<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@BindColor</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>color<span class="token punctuation">.</span>red<span class="token punctuation">)</span> <span class="token keyword">int</span> red<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// int or ColorStateList field</span>
+  <span class="token annotation punctuation">@BindDimen</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>dimen<span class="token punctuation">.</span>spacer<span class="token punctuation">)</span> Float spacer<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// int (for pixel size) or float (for exact value) field</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="非Activity绑定"><a href="#非Activity绑定" class="headerlink" title="非Activity绑定"></a>非Activity绑定</h3><p>除了Activity，你也可以将任意的对象与View绑定。<br>例如在Fragment中：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FancyFragment</span> <span class="token keyword">extends</span> <span class="token class-name">Fragment</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button1<span class="token punctuation">)</span> Button button1<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button2<span class="token punctuation">)</span> Button button2<span class="token punctuation">;</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> View <span class="token function">onCreateView</span><span class="token punctuation">(</span>LayoutInflater inflater<span class="token punctuation">,</span> ViewGroup container<span class="token punctuation">,</span> Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    View view <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fancy_fragment<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ButterKnife<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// TODO Use fields...</span>
+    <span class="token keyword">return</span> view<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>或在适配器中：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyAdapter</span> <span class="token keyword">extends</span> <span class="token class-name">BaseAdapter</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> View <span class="token function">getView</span><span class="token punctuation">(</span><span class="token keyword">int</span> position<span class="token punctuation">,</span> View view<span class="token punctuation">,</span> ViewGroup parent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ViewHolder holder<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>view <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      holder <span class="token operator">=</span> <span class="token punctuation">(</span>ViewHolder<span class="token punctuation">)</span> view<span class="token punctuation">.</span><span class="token function">getTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      view <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>whatever<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      holder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ViewHolder</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      view<span class="token punctuation">.</span><span class="token function">setTag</span><span class="token punctuation">(</span>holder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    holder<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"John Doe"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// etc...</span>
+
+    <span class="token keyword">return</span> view<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">ViewHolder</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>title<span class="token punctuation">)</span> TextView name<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>job_title<span class="token punctuation">)</span> TextView jobTitle<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">ViewHolder</span><span class="token punctuation">(</span>View view<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      ButterKnife<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>任何原来需要使用findViewById的地方都可以用ButterKnife.bind替代。<br>用于绑定的API：<br>如果使用了MVC模式，将控制器的Activity和视图绑定，可以用ButterKnife.bind(this, activity)。<br>将自定义视图绑定到自身，可以用ButterKnife.bind(this)。</p>
+<h3 id="绑定视图列表"><a href="#绑定视图列表" class="headerlink" title="绑定视图列表"></a>绑定视图列表</h3><p>可以将多个视图放在List或数组中。<br>@Bind({ R.id.first_name, R.id.middle_name, R.id.last_name })<br>List<edittext> nameViews;<br>apply方法让你可以同时操作列表中的所有视图：</edittext></p>
+<pre class=" language-java"><code class="language-java">ButterKnife<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>nameViews<span class="token punctuation">,</span> DISABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ButterKnife<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>nameViews<span class="token punctuation">,</span> ENABLED<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Action和Setter接口可以用来指定简单的操作：
+<span class="token keyword">static</span> <span class="token keyword">final</span> ButterKnife<span class="token punctuation">.</span>Action<span class="token operator">&lt;</span>View<span class="token operator">></span> DISABLE <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ButterKnife<span class="token punctuation">.</span>Action</span><span class="token operator">&lt;</span>View<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">apply</span><span class="token punctuation">(</span>View view<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    view<span class="token punctuation">.</span><span class="token function">setEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> ButterKnife<span class="token punctuation">.</span>Setter<span class="token operator">&lt;</span>View<span class="token punctuation">,</span> Boolean<span class="token operator">></span> ENABLED <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ButterKnife<span class="token punctuation">.</span>Setter</span><span class="token operator">&lt;</span>View<span class="token punctuation">,</span> Boolean<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span>View view<span class="token punctuation">,</span> Boolean value<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    view<span class="token punctuation">.</span><span class="token function">setEnabled</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>apply方法还能用来设置View的属性：</p>
+<pre class=" language-java"><code class="language-java">ButterKnife<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>nameViews<span class="token punctuation">,</span> View<span class="token punctuation">.</span>ALPHA<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="监听接口的绑定"><a href="#监听接口的绑定" class="headerlink" title="监听接口的绑定"></a>监听接口的绑定</h3><p>监听器可以自动在方法上配置，如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OnClick</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>submit<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">submit</span><span class="token punctuation">(</span>View view<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// TODO submit data to server...</span>
+<span class="token punctuation">}</span>
+监听器方法的参数是可选的：
+<span class="token annotation punctuation">@OnClick</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>submit<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">submit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// TODO submit data to server...</span>
+<span class="token punctuation">}</span>
+监听器方法的参数可以是具体的类型，它会被自动转型：
+<span class="token annotation punctuation">@OnClick</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>submit<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sayHi</span><span class="token punctuation">(</span>Button button<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  button<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"Hello!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+也可以在单个绑定中指定多个ID来进行常见的事件处理：
+<span class="token annotation punctuation">@OnClick</span><span class="token punctuation">(</span><span class="token punctuation">{</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>door1<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>door2<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>door3 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">pickDoor</span><span class="token punctuation">(</span>DoorView door<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>door<span class="token punctuation">.</span><span class="token function">hasPrizeBehind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">"You win!"</span><span class="token punctuation">,</span> LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">"Try again"</span><span class="token punctuation">,</span> LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+自定义视图自己的监听器可以省去ID：
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FancyButton</span> <span class="token keyword">extends</span> <span class="token class-name">Button</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@OnClick</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO do something!</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="绑定的重置"><a href="#绑定的重置" class="headerlink" title="绑定的重置"></a>绑定的重置</h3><p>Fragment生命周期和Activity不同，当在onCreateView中绑定视图后，要在onDestroyView中将这些视图置为null，ButterKnife提供了Unbinder接口来自动做这件事，如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FancyFragment</span> <span class="token keyword">extends</span> <span class="token class-name">Fragment</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button1<span class="token punctuation">)</span> Button button1<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@Bind</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button2<span class="token punctuation">)</span> Button button2<span class="token punctuation">;</span>
+  <span class="token annotation punctuation">@Unbinder</span> ButterKnife<span class="token punctuation">.</span>Unbinder unbinder<span class="token punctuation">;</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> View <span class="token function">onCreateView</span><span class="token punctuation">(</span>LayoutInflater inflater<span class="token punctuation">,</span> ViewGroup container<span class="token punctuation">,</span> Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    View view <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fancy_fragment<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ButterKnife<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// TODO Use fields...</span>
+    <span class="token keyword">return</span> view<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onDestroyView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroyView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    unbinder<span class="token punctuation">.</span><span class="token function">unbind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="可选绑定"><a href="#可选绑定" class="headerlink" title="可选绑定"></a>可选绑定</h3><p>在默认情况下，如果ID对应的视图没有找到，会抛异常。要使用可选绑定，添加@Nullable或@Optional注解即可：</p>
+<pre><code>@Nullable @Bind(R.id.might_not_be_there) TextView mightNotBeThere;
+
+@Optional @OnClick(R.id.maybe_missing) void onMaybeMissingClicked() {
+  // TODO ...
+}
+</code></pre><h3 id="多方法监听器"><a href="#多方法监听器" class="headerlink" title="多方法监听器"></a>多方法监听器</h3><p>如果注解对应的监听器有多个回掉方法，可以绑定任意一个方法。每种注解都有默认的回掉方法，可以通过callback参数指定为其它的回掉方法：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OnItemSelected</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>list_view<span class="token punctuation">)</span>
+<span class="token keyword">void</span> <span class="token function">onItemSelected</span><span class="token punctuation">(</span><span class="token keyword">int</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// TODO ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@OnItemSelected</span><span class="token punctuation">(</span>value <span class="token operator">=</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>maybe_missing<span class="token punctuation">,</span> callback <span class="token operator">=</span> NOTHING_SELECTED<span class="token punctuation">)</span>
+<span class="token keyword">void</span> <span class="token function">onNothingSelected</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// TODO ...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>对于无法直接绑定视图的常见，ButterKnife提供了<strong>findById</strong>方法简化操作，它通过泛型操作将返回值自动转型。</p>
+<pre class=" language-java"><code class="language-java">View view <span class="token operator">=</span> LayoutInflater<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>thing<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+TextView firstName <span class="token operator">=</span> ButterKnife<span class="token punctuation">.</span><span class="token function">findById</span><span class="token punctuation">(</span>view<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>first_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+TextView lastName <span class="token operator">=</span> ButterKnife<span class="token punctuation">.</span><span class="token function">findById</span><span class="token punctuation">(</span>view<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>last_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ImageView photo <span class="token operator">=</span> ButterKnife<span class="token punctuation">.</span><span class="token function">findById</span><span class="token punctuation">(</span>view<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>photo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 开源库 </tag>
             
         </tags>
         
