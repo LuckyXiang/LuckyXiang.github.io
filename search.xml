@@ -47,7 +47,8 @@
     <entry>
       <title><![CDATA[MarkDown专用版破解方法]]></title>
       <url>/2016/07/01/MarkDown%E4%B8%93%E7%94%A8%E7%89%88%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95/</url>
-      <content type="html"><![CDATA[<h1 id="MarkDown专用版破解方法"><a href="#MarkDown专用版破解方法" class="headerlink" title="MarkDown专用版破解方法"></a>MarkDown专用版破解方法</h1><p><strong>邮箱：</strong> soar360@live.com</p>
+      <content type="html"><![CDATA[<p>使用下面的邮箱和授权秘钥破解MarkDown专用版</p>
+<p><strong>邮箱：</strong> soar360@live.com</p>
 <p><strong>授权秘钥：</strong></p>
 <p>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==</p>
 ]]></content>
@@ -70,7 +71,7 @@
     <entry>
       <title><![CDATA[ButterKnife使用]]></title>
       <url>/2016/04/01/ButterKnife%E4%BD%BF%E7%94%A8/</url>
-      <content type="html"><![CDATA[<h1 id="ButterKnife使用"><a href="#ButterKnife使用" class="headerlink" title="ButterKnife使用"></a>ButterKnife使用</h1><p><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官方网站</a></p>
+      <content type="html"><![CDATA[<p><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官方网站</a></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>ButterKnife意为“黄油刀”，意思是此开源库可以让你的应用开发过程像用刀切黄油一样干净利落。此库的核心功能是通过注解来实现视图的注入，从而在代码中避免冗余的方法调用和丑陋的内部类监听器。<br>简单的理解“绑定”的概念，就是讲View和任意一个对象相互关联，从而在该对象中，不用<strong>findViewById</strong>就能使用View上的所有子视图，不用<strong>setOnClickListener</strong>就能给控件设置监听。</p>
 <h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解(Annotation)是JDK 1.5之后引入的特性，它是一种元数据(meta-data)，即描述数据的数据。元数据这个概念比较难理解，简单的理解，就是对代码的标注，告诉编译器某一段代码需要做怎样的处理。<br>其实我们早就见过注解，在方法重写时，@Override就是一个注解，去掉@Override，代码一样可以运行，增加这个注解的好处，一是增加代码可读性，二是编译器能帮你做一些自动检查，增加代码健壮性。<br>Android引入了两个非常有用的注解，@Nullable和@NonNull，用来标识方法参数或者方法返回值等是否可以为null。以前编程时，为了避免NullPointerException，最终代码中往往到处都是if(Obj == null){…}这样的代码，这是很糟糕的编码方式，有了这两个注解，代码就清晰多了。<br>另外Android中注解的一个重要应用是代替枚举类型，这方面可以参考在Toast中的使用。</p>
 <h2 id="导入项目"><a href="#导入项目" class="headerlink" title="导入项目"></a>导入项目</h2><p>在Android Studio中使用，只需添加依赖：</p>
