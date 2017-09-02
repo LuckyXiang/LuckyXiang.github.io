@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            Mosby MVP的使用 | 
+        
+        LuckyXiang
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+        <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="LuckyXiang">
+    <meta name="description" itemprop="description" content="任祥的博客">
+    <meta name="keywords" content=",开源库">
+
+    <!-- Site Verification -->
+    
+    <meta name="baidu-site-verification" content="LU10o98wWl" />
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="LuckyXiang">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://LuckyXiang.github.io">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Mosby MVP的使用 | LuckyXiang">
+    <meta property="og:image" content="/img/favicon.png" />
+    <meta property="og:description" content="任祥的博客">
+    <meta property="og:article:tag" content="开源库"> 
+
+    
+        <meta property="article:published_time" content="6月 10, 2016" />
+        <meta property="article:modified_time" content="9月 02, 2017" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Mosby MVP的使用 | LuckyXiang">
+    <meta name="twitter:description" content="任祥的博客">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://LuckyXiang.github.io" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://LuckyXiang.github.io/2016/06/10/开源库_Mosby MVP的使用/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "LuckyXiang",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "LuckyXiang",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "做技术一定要有一颗恒心，这样才不会半途而废"
+    },
+    "headline": "Mosby MVP的使用",
+    "url": "https://LuckyXiang.github.io/2016/06/10/开源库_Mosby MVP的使用/index.html",
+    "datePublished": "6月 10, 2016",
+    "dateModified": "9月 02, 2017",
+    "description": "任祥的博客",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://LuckyXiang.github.io"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?fJTiM/K1J3dWIruo3pxtAw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?oCSEO3ST+aEypEwttTDI9g==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    
+    
+    
+    
+    
+    
+    .footer-sns-github {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNCA3OGMtNi40IDEuNC0yNi40IDE0LjItMzYgMjIuOC04IDcuMi0yMiAyOS44LTI0LjQgMzkuMi0xLjYgNi40LTIgMTEzLjItMS42IDM2OCAuNiAyOTkuNCAxIDM1OS44IDMuNCAzNjQgMTEgMjAuMiAyMS42IDMyLjQgMzcuMiA0MyAxNS42IDEwLjYgMTcuMiAxMS4yIDM0LjIgMTMuMiAxMC42IDEuMiA2My40IDEuNiAxMjcuNiAxLjRsMTA5LjYtLjYgNi02LjggNi4yLTYuOC0xLjItMjUuMmMtLjgtMTUuOC0uMi0zMy40IDEuNC00Ny4yIDMtMjUuNCAxLjQtMzYuMi02LTQzLjItNS00LjYtNi4yLTQuOC0zMC42LTQuMi0yNy42LjgtMjQgMS42LTY4LjgtMTYtOC42LTMuNC0yMi42LTE4LTI4LjQtMjkuOC0xMS40LTIyLjgtMjctNDUtMzkuMi01NS42LTE0LTEyLjItMTkuOC0yMC44LTE5LjgtMjguNiAwLTExLjYgMTMuNi0xMi42IDMzLjItMi40IDE2LjYgOC44IDIwLjggMTIuNCA0MC44IDM2LjIgMjQuMiAyOC42IDMxIDMzLjYgNTQgMzkuNiAxNS4yIDQgNDIuMiAzIDUxLjQtMS44IDktNC42IDE4LTE1LjIgMjQuNC0yOS4yIDExLjQtMjQuMiA3LjQtMzEuMi0yMC42LTM2LjgtOS44LTItMjkuMi04LTQzLjQtMTMuNC00MC40LTE1LjgtNjQuNi0zNy40LTg1LjQtNzYuMi0xMS42LTIxLjgtMTUuNC0zMy0xOC4yLTUzLjYtNC4yLTMyLjItNC44LTYwLjItMS40LTg0IDMuNC0yMy44IDYuOC0zMi44IDIwLjItNTQgNC02IDguOC0xNS42IDExLTIxLjQgMy44LTEwIDMuOC0xMS42IDEtMzAtNS4yLTM0LjItMy4yLTUyLjQgNy42LTcwLjIgNy4yLTEyLjIgMTUtMTcuMiAyNC4yLTE1LjggMTIuOCAyLjIgNTIgMTcuNCA2Ni44IDI2LjIgMjYgMTUgMjkgMTUuNCA4Mi40IDcuMiAyNC42LTMuOCAzMy44LTQuMiA2MC0zLjIgMTcgLjYgNDEuNCAzIDU0IDUuMiAzOC40IDYuNiA0OS42IDUuMiA3My0xMCA2LjYtNC4yIDE3LjQtOS40IDI0LTExLjYgNi42LTIuMiAxNi01LjggMjEtOC4yIDEzLTYgMjgtNS42IDM1LjYuOCAxMi40IDEwLjQgMTguNiA0MS40IDE0LjQgNzEuNi00LjQgMzAuNi0zIDM5LjQgOC40IDUzLjggMy40IDQuNCAxMS4yIDE5LjIgMTcuNCAzMy4yTDc3NSA0NDN2NzhsLTEwIDI4Yy0xNS4yIDQzLjItMzYuOCA3My4yLTY2LjIgOTIuOC0xMy40IDguOC01NyAyNS40LTc2LjggMjktMjguMiA1LjItMzMuMiAxMi42LTIyIDMyLjIgMTEuMiAxOS40IDEyLjQgMzIuOCAxMS42IDEyOS42bC0uNiA4NS44IDUuNCA0LjZjMy42IDMgOS4yIDUuMiAxNiA2IDUuOC44IDYwLjIgMSAxMjAuNi42IDEwOC40LS42IDExMC4yLS42IDExOS01IDI0LTExLjYgNDAtMjcuNCA1MS42LTUwLjZsNS40LTExIC42LTM0N2MuNC0yMjMtLjItMzUzLjQtMS40LTM2NS0yLTE3LTIuNi0xOC42LTEzLTM0LTEwLjYtMTUuNC0yMi44LTI2LjItNDMuMi0zNy4yLTQuMi0yLjQtNjQuNi0yLjgtMzY2LTMuMi0xOTguNiAwLTM2NCAuNC0zNjcuNiAxLjR6Ii8+PC9zdmc+);
+    }
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#入门"><span class="post-toc-number">1.</span> <span class="post-toc-text">入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MVP简介"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">MVP简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mosby简介"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Mosby简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hello-MVP-World"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Hello MVP World</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MvpPresenter的基类"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">MvpPresenter的基类</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基础"><span class="post-toc-number">2.</span> <span class="post-toc-text">基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LCE视图"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">LCE视图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MvpLceActivity和MvpLceFragment"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">MvpLceActivity和MvpLceFragment</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ViewState简介"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ViewState简介</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#扩展"><span class="post-toc-number">3.</span> <span class="post-toc-text">扩展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思考"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">思考</span></a></li></ol></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Mosby MVP的使用
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>LuckyXiang</strong>
+        <span>6月 10, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=https://LuckyXiang.github.io/2016/06/10/开源库_Mosby MVP的使用/">
+    
+</ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/开源库/">开源库</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Mosby MVP的使用&url=https://LuckyXiang.github.io/2016/06/10/开源库_Mosby MVP的使用/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LuckyXiang&title=Mosby MVP的使用&summary=任祥的博客&pics=https://LuckyXiang.github.io/img/favicon.png&url=https://LuckyXiang.github.io/2016/06/10/开源库_Mosby MVP的使用/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Android中Mosby MVP的使用</p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><h3 id="MVP简介"><a href="#MVP简介" class="headerlink" title="MVP简介"></a>MVP简介</h3><p>MVP的出发点是关注点分离，将视图和业务逻辑解耦。Model-View-Presenter三个部分可以简单理解为：</p>
+<ul>
+<li><strong>Model</strong>是将在视图中显示的数据。</li>
+<li><strong>View</strong>是显示数据(model)的界面，同时将用户指令(事件)发送给Presenter来处理。View通常含有Presenter的引用。在Android中Activity，Fragment和ViewGroup都扮演视图的角色。</li>
+<li><strong>Presenter</strong>是中间人，同时有两者的引用。<strong>请注意单词model非常有误导性。它应该是获取或处理model的业务逻辑</strong>。例如：如果你的数据库表中存储着User，而你的视图想显示用户列表，那么Presenter将有一个数据库业务逻辑(例如DAO)类的引用，Presenter通过它来查询用户列表。</li>
+</ul>
+<blockquote>
+<p><strong>思考</strong>：MVC，MVP和MVVM之间有什么区别和联系？</p>
+</blockquote>
+<p><strong>消极视图</strong>：在MVP中，View是<strong>消极视图(Passive View)</strong>，也就是说它尽量不去主动做事，而是让Presenter通过抽象方式控制View，例如Presenter调用view.showLoading()方法来显示加载效果，但Presenter不应该控制View的具体实现，例如动画，所以Presenter不应该调用view.startAnimation()这样的方法。</p>
+<p><img src="http://ovmzdfex7.bkt.clouddn.com/17-9-2/8664195.jpg" alt=""></p>
+<h3 id="Mosby简介"><a href="#Mosby简介" class="headerlink" title="Mosby简介"></a>Mosby简介</h3><p><strong>设计目标</strong>：让你能用清晰的Model-View-Presenter架构来构建Android app。</p>
+<p><strong>注意</strong>：Mosby是一个库(library)，不是一个框架(framework)。</p>
+<blockquote>
+<p><strong>思考</strong>：什么是library？什么是framework？它们的区别是什么？</p>
+</blockquote>
+<p>Mosby的内核是一个基于委托模式(delegation)的很精简的库。你可以使用委托(delegation)和组合(composition)将Mosby集成到你的开发技术栈中。这样你就能避免框架(framework)带来的限制和约束。</p>
+<blockquote>
+<p><strong>思考</strong>：什么是委托模式？委托和继承的区别是什么？使用委托有什么好处？</p>
+</blockquote>
+<p><strong>依赖</strong>：<br>Mosby被分成模块，你可以选择你需要的功能：</p>
+<pre class=" language-java"><code class="language-java">dependencies <span class="token punctuation">{</span>
+    compile <span class="token string">'com.hannesdorfmann.mosby:mvp:2.0.1'</span>
+    compile <span class="token string">'com.hannesdorfmann.mosby:viewstate:2.0.1'</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="Hello-MVP-World"><a href="#Hello-MVP-World" class="headerlink" title="Hello MVP World"></a>Hello MVP World</h3><p>先来用Mosby MVP库来实现一个最简单的功能，页面有两个Button和一个TextView，需求如下：</p>
+<ul>
+<li>点击Hello按钮，显示红色文本 “Hello” + 随机数；</li>
+<li>点击Goodbye按钮，显示蓝色文本 “Goodbye” + 随机数；<br>这里假设随机数的生成过程涉及到复杂的业务逻辑计算，是一个耗时操作，需要2s时间。</li>
+</ul>
+<p><strong>第一步</strong>我们用一个AsyncTask来实现这个模拟的业务逻辑，在自定义的AsyncTask中，要定义一个监听器，用来传递业务逻辑执行结果：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GreetingGeneratorTask</span> <span class="token keyword">extends</span> <span class="token class-name">AsyncTask</span><span class="token operator">&lt;</span>Void<span class="token punctuation">,</span> Void<span class="token punctuation">,</span> Integer<span class="token operator">></span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// Callback - listener</span>
+    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">GreetingTaskListener</span><span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token function">onGreetingGenerated</span><span class="token punctuation">(</span>String greetingText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment" spellcheck="true">// 模拟计算过程，返回一个随机值。</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> Integer <span class="token function">doInBackground</span><span class="token punctuation">(</span>Void<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onPostExecute</span><span class="token punctuation">(</span>Integer randomInt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        listener<span class="token punctuation">.</span><span class="token function">onGreetingGenerated</span><span class="token punctuation">(</span>baseText <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> randomInt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>第二步</strong>定义视图接口，视图接口需要继承MvpView：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">HelloWorldView</span> <span class="token keyword">extends</span> <span class="token class-name">MvpView</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">void</span> <span class="token function">showHello</span><span class="token punctuation">(</span>String greetingText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">showGoodbye</span><span class="token punctuation">(</span>String greetingText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>注意</strong>这里的MvpView是所有视图的顶层接口，它是一个空接口，没有定义任何方法。</p>
+<p><strong>第三步</strong>实现Presenter，Presenter需要执行业务逻辑，并针对不同的执行结果调用视图的对应方法。<br>Presenter的顶层接口是MvpPresenter，它有两个方法：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">MvpPresenter</span><span class="token operator">&lt;</span>V <span class="token keyword">extends</span> <span class="token class-name">MvpView</span><span class="token operator">></span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 将View附着到Presenter上
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">attachView</span><span class="token punctuation">(</span>V view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 在视图被摧毁时调用。典型场景是Activity.onDestroy()和Fragment.onDestroyView()方法
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">detachView</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> retainInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Mosby提供了MvpPresenter接口的基类实现，在这里我们继承MvpBasePresenter:</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorldPresenter</span> <span class="token keyword">extends</span> <span class="token class-name">MvpBasePresenter</span><span class="token operator">&lt;</span>HelloWorldView<span class="token operator">></span><span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> GreetingGeneratorTask greetingTask<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">cancelGreetingTaskIfRunning</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>greetingTask <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            greetingTask<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">greetHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">cancelGreetingTaskIfRunning</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        greetingTask <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GreetingGeneratorTask</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">GreetingGeneratorTask<span class="token punctuation">.</span>GreetingTaskListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onGreetingGenerated</span><span class="token punctuation">(</span>String greetingText<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isViewAttached</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">showHello</span><span class="token punctuation">(</span>greetingText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        greetingTask<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">detachView</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> retainInstance<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">detachView</span><span class="token punctuation">(</span>retainInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>retainInstance<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">cancelGreetingTaskIfRunning</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>注意</strong>在detachView方法中取消后台任务的处理。</p>
+<p><strong>第四步</strong>实现Activity，让我们的Activity继承MvpActivity，并实现HelloWorldView接口。<br>MvpActivity有两个泛型，分别是Presenter和View的具体类型：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorldActivity</span> <span class="token keyword">extends</span> <span class="token class-name">MvpActivity</span><span class="token operator">&lt;</span>HelloWorldView<span class="token punctuation">,</span> HelloWorldPresenter<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">HelloWorldView</span><span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>继承MvpActivity后，只有一个抽象方法createPresenter()需要实现：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> HelloWorldPresenter <span class="token function">createPresenter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">HelloWorldPresenter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>HelloWorldView还有两个方法需要实现：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showHello</span><span class="token punctuation">(</span>String greetingText<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    greetingTextView<span class="token punctuation">.</span><span class="token function">setTextColor</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>RED<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    greetingTextView<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>greetingText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showGoodbye</span><span class="token punctuation">(</span>String greetingText<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    greetingTextView<span class="token punctuation">.</span><span class="token function">setTextColor</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>BLUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    greetingTextView<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>greetingText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+点击按钮后，使用Presenter来完成相关操作：
+<span class="token annotation punctuation">@OnClick</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>helloButton<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onHelloButtonClicked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    presenter<span class="token punctuation">.</span><span class="token function">greetHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@OnClick</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>goodbyeButton<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onGoodbyeButtonClicked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    presenter<span class="token punctuation">.</span><span class="token function">greetGoodbye</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="MvpPresenter的基类"><a href="#MvpPresenter的基类" class="headerlink" title="MvpPresenter的基类"></a>MvpPresenter的基类</h3><p><strong>Presenter默认实现一</strong>：使用弱引用保存视图引用，在调用getView()之前必须判断isViewAttached()。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MvpBasePresenter</span><span class="token operator">&lt;</span>V <span class="token keyword">extends</span> <span class="token class-name">MvpView</span><span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">MvpPresenter</span><span class="token operator">&lt;</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">private</span> WeakReference<span class="token operator">&lt;</span>V<span class="token operator">></span> viewRef<span class="token punctuation">;</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">attachView</span><span class="token punctuation">(</span>V view<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    viewRef <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakReference</span><span class="token operator">&lt;</span>V<span class="token operator">></span><span class="token punctuation">(</span>view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Nullable</span> <span class="token keyword">public</span> V <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> viewRef <span class="token operator">==</span> null <span class="token operator">?</span> null <span class="token operator">:</span> viewRef<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isViewAttached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> viewRef <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> viewRef<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">detachView</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> retainInstance<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>viewRef <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      viewRef<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      viewRef <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Presenter默认实现二</strong>：使用Null Object Pattern，在调用getView()时无需判断。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MvpNullObjectBasePresenter</span><span class="token operator">&lt;</span>V <span class="token keyword">extends</span> <span class="token class-name">MvpView</span><span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">MvpPresenter</span><span class="token operator">&lt;</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">private</span> V view<span class="token punctuation">;</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">attachView</span><span class="token punctuation">(</span>V view<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>view <span class="token operator">=</span> view<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@NonNull</span> <span class="token keyword">public</span> V <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>view <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token string">"MvpView reference is null. Have you called attachView()?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> view<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">detachView</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> retainInstance<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>view <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+      Type<span class="token punctuation">[</span><span class="token punctuation">]</span> types <span class="token operator">=</span>
+          <span class="token punctuation">(</span><span class="token punctuation">(</span>ParameterizedType<span class="token punctuation">)</span> <span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getGenericSuperclass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getActualTypeArguments</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      Class<span class="token operator">&lt;</span>V<span class="token operator">></span> viewClass <span class="token operator">=</span> <span class="token punctuation">(</span>Class<span class="token operator">&lt;</span>V<span class="token operator">></span><span class="token punctuation">)</span> types<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      view <span class="token operator">=</span> NoOp<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>viewClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p><strong>思考</strong>：什么是空对象模式(Null Object Pattern)？</p>
+</blockquote>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="LCE视图"><a href="#LCE视图" class="headerlink" title="LCE视图"></a>LCE视图</h3><p>在开发Android应用过程中，我们会发现很多页面有相似的结构和UI逻辑，所以我们常常在写重复代码。如果能抽象出相似页面的View接口，然后封装页面的基类，就能让开发方便很多。Mosby就给我们提供了一个这样的视图模板，叫做<strong>LCE View</strong>。<br>LCE代表Loading-Content-Error(加载-内容-错误)，此视图有三种状态：显示加载中，显示数据内容，或者显示错误视图。例如在如下的场景中：<br>假设我们要在ListView中显示一个国家列表，国家列表的数据是从网络获取的，是一个耗时操作。在加载过程中，我们要显示一个ProgressBar，如果加载出错，我们要显示一条错误信息。另外，还要用SwipeRefreshLayout来让用户可以下拉刷新。<br>LCE View的接口定义如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">MvpLceView</span><span class="token operator">&lt;</span>M<span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">MvpView</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 显示加载视图，加载视图的id必须为R.id.loadingView
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showLoading</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 显示内容视图，内容视图的id必须为R.id.contentView
+   *
+   * &lt;b>The content view must have the id = R.id.contentView&lt;/b>
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 显示错误视图，错误视图必须是TextView，id必须是R.id.errorView
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showError</span><span class="token punctuation">(</span>Throwable e<span class="token punctuation">,</span> <span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 设置将在showContent()中显示的数据
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setData</span><span class="token punctuation">(</span>M data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * 加载数据，此方法中常需要调用Presenter的对应方法。因此此方法不可在Presenter
+   * 中使用，避免循环调用。
+   * 参数pullToRefresh代表此次加载是否由下拉刷新触发。
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p><strong>思考</strong>：LCE视图中考虑了下拉刷新，但没有考虑上拉加载，如果服务器是分页接口，需要添加上拉加载，应该怎样定义视图接口？</p>
+</blockquote>
+<h3 id="MvpLceActivity和MvpLceFragment"><a href="#MvpLceActivity和MvpLceFragment" class="headerlink" title="MvpLceActivity和MvpLceFragment"></a>MvpLceActivity和MvpLceFragment</h3><p>Mosby封装了LCE视图的基类，现在我们用MvpLceActivity或MvpLceFragment来实现上面所说的加载国家列表的场景。<br><strong>第一步</strong>完成界面布局，注意id必须使用上面指定的名称，错误视图只能是一个TextView：</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FrameLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name">......</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span> <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/loading_view<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span> <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/error_view<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.v4.widget.SwipeRefreshLayout</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/contentView<span class="token punctuation">"</span></span>
+        <span class="token attr-name">......</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ListView</span> <span class="token attr-name">......</span><span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>android.support.v4.widget.SwipeRefreshLayout</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>FrameLayout</span><span class="token punctuation">></span></span>
+</code></pre>
+<p><strong>第二步</strong>继承MvpLceView实现自己的视图接口，此处需要指定泛型，作为数据类型：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">CountriesView</span> <span class="token keyword">extends</span> <span class="token class-name">MvpLceView</span><span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Country<span class="token operator">>></span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>第三步</strong>实现Presenter，在这里我们做了一个接口和一个实现：</p>
+<p>接口定义：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">CountriesPresenter</span> <span class="token keyword">extends</span> <span class="token class-name">MvpPresenter</span><span class="token operator">&lt;</span>CountriesView<span class="token operator">></span><span class="token punctuation">{</span>
+
+    <span class="token keyword">void</span> <span class="token function">loadCountries</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>具体实现：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleCountriesPresenter</span> <span class="token keyword">extends</span> <span class="token class-name">MvpNullObjectBasePresenter</span><span class="token operator">&lt;</span>CountriesView<span class="token operator">></span>
+        <span class="token keyword">implements</span> <span class="token class-name">CountriesPresenter</span><span class="token punctuation">{</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">loadCountries</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">showLoading</span><span class="token punctuation">(</span>pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+        countriesLoader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CountriesAsyncLoader</span><span class="token punctuation">(</span><span class="token operator">++</span>failingCounter <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">CountriesAsyncLoader<span class="token punctuation">.</span>CountriesLoaderListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onSuccess</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>Country<span class="token operator">></span> countries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>countries<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">showContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onError</span><span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">getView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">showError</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        countriesLoader<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>上面代码中就使用到了MvpLceView中除loadData()外的全部四个方法。<br><strong>第四步</strong>实现Activity或者Fragment，先以Activity为例，需要继承MvpLceActivity:</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CountriesActivity</span> <span class="token keyword">extends</span> <span class="token class-name">MvpLceActivity</span><span class="token operator">&lt;</span>SwipeRefreshLayout<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>Country<span class="token operator">></span><span class="token punctuation">,</span> CountriesView<span class="token punctuation">,</span> CountriesPresenter<span class="token operator">></span>
+        <span class="token keyword">implements</span> <span class="token class-name">SwipeRefreshLayout<span class="token punctuation">.</span>OnRefreshListener</span><span class="token punctuation">,</span> CountriesView<span class="token punctuation">{</span>
+</code></pre>
+<p><strong>MvpLceActivity</strong>中定义了四个泛型，分别是ContentView的类型，Data的类型，视图接口的类型和Presenter的类型。此处ContentView使用的是SwipeRefreshLayout。</p>
+<p>继承<strong>MvpLceActivity</strong>后有两个方法需要实现：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">protected</span> String <span class="token function">getErrorMessage</span><span class="token punctuation">(</span>Throwable e<span class="token punctuation">,</span> <span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pullToRefresh<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Error while loading countries"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Error while loading countries. Click here to retry"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@NonNull</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> CountriesPresenter <span class="token function">createPresenter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">SimpleCountriesPresenter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>实现<strong>CountriesView</strong>接口后，重写如下几个方法：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setData</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>Country<span class="token operator">></span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    adapter<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    adapter<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    adapter<span class="token punctuation">.</span><span class="token function">notifyDataSetChanged</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">showContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    contentView<span class="token punctuation">.</span><span class="token function">setRefreshing</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showError</span><span class="token punctuation">(</span>Throwable e<span class="token punctuation">,</span> <span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">showError</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    contentView<span class="token punctuation">.</span><span class="token function">setRefreshing</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> pullToRefresh<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    presenter<span class="token punctuation">.</span><span class="token function">loadCountries</span><span class="token punctuation">(</span>pullToRefresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>实现<strong>OnRefreshListener</strong>接口后，需要实现一个方法：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onRefresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>如果要用Fragment，方法基本上一样，只需继承MvpLceFragment，唯一的区别是，Activity的初始化在onCreate()中完成，Fragment的初始化在onViewCreated()中完成：<br>在Activity中：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>countries_list<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ButterKnife<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    contentView<span class="token punctuation">.</span><span class="token function">setOnRefreshListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    adapter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayAdapter</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_list_item_1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    listView<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>adapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>在Fragment中：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onViewCreated</span><span class="token punctuation">(</span>View view<span class="token punctuation">,</span> <span class="token annotation punctuation">@Nullable</span> Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onViewCreated</span><span class="token punctuation">(</span>view<span class="token punctuation">,</span> savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ButterKnife<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    contentView<span class="token punctuation">.</span><span class="token function">setOnRefreshListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    contentView<span class="token punctuation">.</span><span class="token function">setOnRefreshListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    adapter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayAdapter</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_list_item_1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    listView<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>adapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="ViewState简介"><a href="#ViewState简介" class="headerlink" title="ViewState简介"></a>ViewState简介</h3><p>在Android开发中有一个很麻烦的问题，就是在界面被销毁、被重建的过程中保存和恢复视图状态。界面被系统回收和重建常常发生在这两个场景中：</p>
+<ul>
+<li>Configuration变化，例如屏幕在横竖屏之间切换，语言环境变化等。</li>
+<li>界面切到后台(例如用户按Home键)，Android在内存过低时自动回收此Activity，在界面重新显示时重建Activity。</li>
+</ul>
+<blockquote>
+<p><strong>思考</strong>：两种Activity被回收和重建的场景，有什么区别？</p>
+</blockquote>
+<p>Mosby提供了一个ViewState特性来解决这一问题。ViewState是一个接口，只有一个apply方法：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ViewState</span><span class="token operator">&lt;</span>V <span class="token keyword">extends</span> <span class="token class-name">MvpView</span><span class="token operator">></span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">/**
+   * Called to apply this viewstate on a given view.
+   *
+   * @param view The {@link MvpView}
+   * @param retained true, if the components like the viewstate and the presenter have been
+   * retained
+   * because the {@link Fragment#setRetainInstance(boolean)} has been set to true
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">apply</span><span class="token punctuation">(</span>V view<span class="token punctuation">,</span> <span class="token keyword">boolean</span> retained<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>例如，上面讲过的MvpLceFragment，如果想在横竖屏切换过程中保存和恢复视图状态，只需改成继承MvpLceViewStateFragment，实现如下一个方法即可：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> LceViewState<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Country<span class="token operator">></span><span class="token punctuation">,</span> CountriesView<span class="token operator">></span> <span class="token function">createViewState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setRetainInstance</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">RetainingLceViewState</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>这是针对Mosby提供的LceView的ViewState，如果是我们的自定义视图，也可以实现自己的ViewState。整个ViewState特性的实现原理和应用方法比较复杂，这里不做过多介绍。</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ul>
+<li>MVC，MVP和MVVM之间有什么区别和联系？</li>
+<li>什么是委托模式？委托和继承的区别是什么？使用委托有什么好处？</li>
+<li><p>什么是library？什么是framework？它们的区别是什么？</p>
+<blockquote>
+<p><strong>提示</strong>：library和framework的关键区别是“控制反转”(Inversion of Control)。当你调用library中的方法时，你掌握控制权。但使用framework时，控制是倒转的：由framework来调用你的代码。<br><img src="http://ovmzdfex7.bkt.clouddn.com/17-9-2/18695493.jpg" alt=""></p>
+</blockquote>
+</li>
+<li><p>什么是空对象模式(Null Object Pattern)？</p>
+</li>
+<li>LCE视图中考虑了下拉刷新，但没有考虑上拉加载，如果服务器是分页接口，需要添加上拉加载，应该怎样定义视图接口？</li>
+<li>两种Activity被回收和重建的场景，有什么区别？<blockquote>
+<p><strong>提示</strong>：参考下面两个方法：<br>Fragmemt.setRetainInstance(boolean retain)<br>Activity.onRetainNonConfigurationInstance()</p>
+</blockquote>
+</li>
+</ul>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/07/01/解决android studio引用远程仓库下载慢(JCenter下载慢)/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/05/25/开源库_Gson使用/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+			
+			<!-- UY BEGIN -->
+			<div id="uyan_frame" class="mdl-card mdl-cell mdl-cell--12-col" style="padding:8px"></div>
+			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2142997"></script>
+			<!-- UY END -->
+        </div>
+	</script>
+
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="LuckyXiang's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        997791972@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: 997791972@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">3</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Tools/">Tools<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">8</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/LuckyXiang" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;2016&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>LuckyXiang
+        </div>
+		
+		<div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+     
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+	
+</html>

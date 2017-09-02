@@ -74,7 +74,7 @@
 
     
         <meta property="article:published_time" content="4月 01, 2016" />
-        <meta property="article:modified_time" content="9月 01, 2017" />
+        <meta property="article:modified_time" content="9月 02, 2017" />
     
 
     <!-- The Twitter Card protocol -->
@@ -86,7 +86,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://LuckyXiang.github.io/2016/04/01/ButterKnife使用/index.html" />
+        <link rel="canonical" href="https://LuckyXiang.github.io/2016/04/01/开源库_ButterKnife使用/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -113,9 +113,9 @@
         "description": "做技术一定要有一颗恒心，这样才不会半途而废"
     },
     "headline": "ButterKnife使用",
-    "url": "https://LuckyXiang.github.io/2016/04/01/ButterKnife使用/index.html",
+    "url": "https://LuckyXiang.github.io/2016/04/01/开源库_ButterKnife使用/index.html",
     "datePublished": "4月 01, 2016",
-    "dateModified": "9月 01, 2017",
+    "dateModified": "9月 02, 2017",
     "description": "任祥的博客",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -408,12 +408,21 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=https://LuckyXiang.github.io/2016/04/01/ButterKnife使用/">
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=https://LuckyXiang.github.io/2016/04/01/开源库_ButterKnife使用/">
     
 </ul>
     
 
     <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/开源库/">开源库</a>
+    </ul>
     
 
     <!-- Share -->
@@ -439,7 +448,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ButterKnife使用&url=https://LuckyXiang.github.io/2016/04/01/ButterKnife使用/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ButterKnife使用&url=https://LuckyXiang.github.io/2016/04/01/开源库_ButterKnife使用/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -460,7 +469,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LuckyXiang&title=ButterKnife使用&summary=任祥的博客&pics=https://LuckyXiang.github.io/img/favicon.png&url=https://LuckyXiang.github.io/2016/04/01/ButterKnife使用/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LuckyXiang&title=ButterKnife使用&summary=任祥的博客&pics=https://LuckyXiang.github.io/img/favicon.png&url=https://LuckyXiang.github.io/2016/04/01/开源库_ButterKnife使用/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -478,7 +487,8 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官方网站</a></p>
+        <p>Android中ButterKnife的使用</p>
+<p><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官方网站</a></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>ButterKnife意为“黄油刀”，意思是此开源库可以让你的应用开发过程像用刀切黄油一样干净利落。此库的核心功能是通过注解来实现视图的注入，从而在代码中避免冗余的方法调用和丑陋的内部类监听器。<br>简单的理解“绑定”的概念，就是讲View和任意一个对象相互关联，从而在该对象中，不用<strong>findViewById</strong>就能使用View上的所有子视图，不用<strong>setOnClickListener</strong>就能给控件设置监听。</p>
 <h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解(Annotation)是JDK 1.5之后引入的特性，它是一种元数据(meta-data)，即描述数据的数据。元数据这个概念比较难理解，简单的理解，就是对代码的标注，告诉编译器某一段代码需要做怎样的处理。<br>其实我们早就见过注解，在方法重写时，@Override就是一个注解，去掉@Override，代码一样可以运行，增加这个注解的好处，一是增加代码可读性，二是编译器能帮你做一些自动检查，增加代码健壮性。<br>Android引入了两个非常有用的注解，@Nullable和@NonNull，用来标识方法参数或者方法返回值等是否可以为null。以前编程时，为了避免NullPointerException，最终代码中往往到处都是if(Obj == null){…}这样的代码，这是很糟糕的编码方式，有了这两个注解，代码就清晰多了。<br>另外Android中注解的一个重要应用是代替枚举类型，这方面可以参考在Toast中的使用。</p>
 <h2 id="导入项目"><a href="#导入项目" class="headerlink" title="导入项目"></a>导入项目</h2><p>在Android Studio中使用，只需添加依赖：</p>
@@ -672,7 +682,7 @@ ImageView photo <span class="token operator">=</span> ButterKnife<span class="to
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2016/07/01/MarkDown专用版破解方法/" id="post_nav-newer" class="prev-content">
+        <a href="/2016/04/10/开源库_EventBus基础使用/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -776,7 +786,7 @@ ImageView photo <span class="token operator">=</span> ButterKnife<span class="to
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">3</span></a>
             </ul>
         </li>
         
@@ -794,7 +804,7 @@ ImageView photo <span class="token operator">=</span> ButterKnife<span class="to
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Tools/">Tools<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Tools/">Tools<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -822,7 +832,7 @@ ImageView photo <span class="token operator">=</span> ButterKnife<span class="to
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">3</span>
+                <span class="sidebar-badge">8</span>
             </a>
         </li>
         
