@@ -74,7 +74,7 @@
 
     
         <meta property="article:published_time" content="5月 09, 2016" />
-        <meta property="article:modified_time" content="9月 02, 2017" />
+        <meta property="article:modified_time" content="9月 11, 2017" />
     
 
     <!-- The Twitter Card protocol -->
@@ -115,7 +115,7 @@
     "headline": "OkHttp使用",
     "url": "https://LuckyXiang.github.io/2016/05/09/开源库_OkHttp使用/index.html",
     "datePublished": "5月 09, 2016",
-    "dateModified": "9月 02, 2017",
+    "dateModified": "9月 11, 2017",
     "description": "任祥的博客",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -619,28 +619,29 @@ Response response <span class="token operator">=</span> client<span class="token
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="Post字符串"><a href="#Post字符串" class="headerlink" title="Post字符串"></a>Post字符串</h3><p>以下的例子显示了如何Post一个字符串给服务器，同样，不要使用此API传送大文件(&gt; 1M)。</p>
-<pre><code>private final OkHttpClient client = new OkHttpClient();
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> OkHttpClient client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OkHttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-public void run() throws Exception {
-    String postBody = &quot;&quot;
-            + &quot;Releases\n&quot;
-            + &quot;--------\n&quot;
-            + &quot;\n&quot;
-            + &quot; * _1.0_ May 6, 2013\n&quot;
-            + &quot; * _1.1_ June 15, 2013\n&quot;
-            + &quot; * _1.2_ August 11, 2013\n&quot;;
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+    String postBody <span class="token operator">=</span> <span class="token string">""</span>
+            <span class="token operator">+</span> <span class="token string">"Releases\n"</span>
+            <span class="token operator">+</span> <span class="token string">"--------\n"</span>
+            <span class="token operator">+</span> <span class="token string">"\n"</span>
+            <span class="token operator">+</span> <span class="token string">" * _1.0_ May 6, 2013\n"</span>
+            <span class="token operator">+</span> <span class="token string">" * _1.1_ June 15, 2013\n"</span>
+            <span class="token operator">+</span> <span class="token string">" * _1.2_ August 11, 2013\n"</span><span class="token punctuation">;</span>
 
-    Request request = new Request.Builder()
-            .url(&quot;https://api.github.com/markdown/raw&quot;)
-            .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, postBody))
-            .build();
+    Request request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Request<span class="token punctuation">.</span>Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token string">"https://api.github.com/markdown/raw"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>RequestBody<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>MEDIA_TYPE_MARKDOWN<span class="token punctuation">,</span> postBody<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    Response response = client.newCall(request).execute();
-    if (!response.isSuccessful()) throw new IOException(&quot;Unexpected code &quot; + response);
+    Response response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">newCall</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>response<span class="token punctuation">.</span><span class="token function">isSuccessful</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IOException</span><span class="token punctuation">(</span><span class="token string">"Unexpected code "</span> <span class="token operator">+</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    System.out.println(response.body().string());
-}
-</code></pre><h3 id="Post流"><a href="#Post流" class="headerlink" title="Post流"></a>Post流</h3><p>下面的例子使用了Okio的buffered sink。如果想使用OutputStream，可以通过<br>BufferedSink.outputStream()方法。</p>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="Post流"><a href="#Post流" class="headerlink" title="Post流"></a>Post流</h3><p>下面的例子使用了Okio的buffered sink。如果想使用OutputStream，可以通过<br>BufferedSink.outputStream()方法。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> MediaType MEDIA_TYPE_MARKDOWN
         <span class="token operator">=</span> MediaType<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"text/x-markdown; charset=utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
