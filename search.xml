@@ -3,6 +3,945 @@
   
     
     <entry>
+      <title><![CDATA[Android 布局优化]]></title>
+      <url>/2017/08/09/%E9%9D%A2%E8%AF%95%E9%A2%98_Android%20%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</url>
+      <content type="html"><![CDATA[<p>面试题 —— Android 布局优化</p>
+<p>关于Android中的布局优化，思想很简单，就是尽可能减少布局文件的嵌套层级，布局中的嵌套少了，那么Android绘制工作量也就减少了，那么程序的性能自然也就提高了。</p>
+<p>那么如何优化布局，是我们关心的一个重点。首先，在平时的布局搭建中，尽可能减少布局中的无用控件和层级，其次有选择使用性能较低的ViewGroup，例如布局搭建中，优先选择LinearLayout和FrameLayout，如果单纯使用LinearLayout和FrameLayout无法实现需求，需要嵌套实现，那么建议使用RelativeLayout，嵌套的布局加深了布局的层级关系，降低性能。</p>
+<p>此外我们也可以借助另外一种<code>&lt;include&gt;</code>标签<code>&lt;merge&gt;</code>标签和ViewStub来实现布局优化。</p>
+<ol>
+<li><strong>include标签</strong>：主要用于布局的重用。</li>
+<li><strong>merge标签</strong>：减少布局的层级关系，一般常与<code>&lt;include&gt;</code>结合使用。</li>
+<li><strong>ViewStub</strong>：按需加载，需要时才会加载布局到内存。</li>
+</ol>
+<h3 id="1-include"><a href="#1-include" class="headerlink" title="1. include"></a>1. include</h3><p>将一个指定的布局加载到当前布局中.</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/activity_main<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>vertical<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.gqq.layoutdemo.MainActivity<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+    <span class="token comment" spellcheck="true">&lt;!--加入重用的布局--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span> <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/layout_header<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+    <span class="token comment" spellcheck="true">&lt;!--加入重用的布局--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/layoutHeader<span class="token punctuation">"</span></span>
+        <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/layout_header<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Hello World!<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>在<code>&lt;include&gt;</code>标签当中，我们是可以覆写所有layout属性的，即include中指定的layout属性将会覆盖掉重用布局中指定的layout属性,如<code>layout_gravity</code>、<code>layout_margin</code>等，而非layout属性则无法在<code>&lt;include&gt;</code>标签当中进行覆写。另外需要注意的是，如果我们想要在<code>&lt;include&gt;</code>标签当中覆写layout属性，必须要将<code>layout_width</code>和<code>layout_height</code>这两个属性也进行覆写，否则将报错或覆写效果将不会生效。</p>
+<h3 id="2-merge"><a href="#2-merge" class="headerlink" title="2. merge"></a>2. merge</h3><p>merge标签一般用于减少布局不必要的层级关系，一般常与<code>&lt;include&gt;</code>使用或自定义布局。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>merge</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/tvDec<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>18sp<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hhhhhhhh<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/btnShow<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hhhhhhhhh<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_below</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@id/tvDec<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>merge</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>关于布局的层级关系，可以借助SDK的工具：uiautomatorviewer或hierarchyviewer来查看。</p>
+<h3 id="3-ViewStub"><a href="#3-ViewStub" class="headerlink" title="3. ViewStub"></a>3. ViewStub</h3><p>ViewStub非常轻量级，且宽高均为0，它主要是按需加载所需的布局文件，有些布局文件，比如网络请求失败的布局，只有在失败的时候加载出来，没必要在页面初始化的时候加载，所以通过ViewStub可提高初始化时的性能。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RelativeLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>vertical<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/tvName<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>加载的数据啊<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ViewStub</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/layout_view<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/layout_viewstub<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RelativeLayout</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>在代码中，需要加载ViewStub布局时，两种方式进行：</p>
+<pre class=" language-java"><code class="language-java">ViewStub viewStub <span class="token operator">=</span> <span class="token punctuation">(</span>ViewStub<span class="token punctuation">)</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>layout_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 1</span>
+viewStub<span class="token punctuation">.</span><span class="token function">setVisibility</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span>VISIBLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 2</span>
+viewStub<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>ViewStub暂不支持<code>&lt;merge&gt;</code>标签。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 面试题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 布局 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android6.0运行时权限处理]]></title>
+      <url>/2017/08/04/%E9%9D%A2%E8%AF%95%E9%A2%98_Android%E6%9D%83%E9%99%90%E5%A4%84%E7%90%86/</url>
+      <content type="html"><![CDATA[<p>面试题 —— Android6.0运行时权限处理</p>
+<p>Android6.0的发布介绍了一种新的权限机制。用户可以在运行时直接管理应用程序的权限，这个功能提升了权限控制的可见性和可控性，同时简化了安装和自动升级过程，用户可以单独撤销或者授予应用程序某项权限，对应用拥有更多的控制权。</p>
+<p>应用程序target是Android 6.0及以上（API level 23），要确保在运行时检查和请求权限，在6.0以后有些权限属于危险权限，清单中声明权限，不能保证权限授权通过，为了确定你的app是否授予某个权限，通过checkSelfPermission()方法判断，请求权限使用requestPermissions()方法。即使你的app不是target Android 6.0，你也应该在新的权限机制下测试你的应用。</p>
+<h3 id="1-Android权限管理"><a href="#1-Android权限管理" class="headerlink" title="1. Android权限管理"></a>1. Android权限管理</h3><p>Google将权限分为两类，一类是普通权限（Normal Permissions），这类权限一般不涉及用户隐私，也不需要用户进行授权，如网络访问，手机震动等，另外一类是危险权限（Dangerous Permission），涉及用户隐私，需要用户授权，如对sd卡读取、访问用户手机通讯录、拨打电话等。</p>
+<p>关于Android的危险权限：Dangerous Permissions:</p>
+<pre class=" language-xml"><code class="language-xml">    group:android.permission-group.CONTACTS
+      permission:android.permission.WRITE_CONTACTS
+      permission:android.permission.GET_ACCOUNTS
+      permission:android.permission.READ_CONTACTS
+
+    group:android.permission-group.PHONE
+      permission:android.permission.READ_CALL_LOG
+      permission:android.permission.READ_PHONE_STATE
+      permission:android.permission.CALL_PHONE
+      permission:android.permission.WRITE_CALL_LOG
+      permission:android.permission.USE_SIP
+      permission:android.permission.PROCESS_OUTGOING_CALLS
+      permission:com.android.voicemail.permission.ADD_VOICEMAIL
+
+    group:android.permission-group.CALENDAR
+      permission:android.permission.READ_CALENDAR
+      permission:android.permission.WRITE_CALENDAR
+
+    group:android.permission-group.CAMERA
+      permission:android.permission.CAMERA
+
+    group:android.permission-group.SENSORS
+      permission:android.permission.BODY_SENSORS
+
+    group:android.permission-group.LOCATION
+      permission:android.permission.ACCESS_FINE_LOCATION
+      permission:com.google.android.gms.permission.CAR_SPEED
+      permission:android.permission.ACCESS_COARSE_LOCATION
+
+    group:android.permission-group.STORAGE
+      permission:android.permission.READ_EXTERNAL_STORAGE
+      permission:android.permission.WRITE_EXTERNAL_STORAGE
+
+    group:android.permission-group.MICROPHONE
+      permission:android.permission.RECORD_AUDIO
+
+    group:android.permission-group.SMS
+      permission:android.permission.READ_SMS
+      permission:android.permission.RECEIVE_WAP_PUSH
+      permission:android.permission.RECEIVE_MMS
+      permission:android.permission.RECEIVE_SMS
+      permission:android.permission.SEND_SMS
+      permission:android.permission.READ_CELL_BROADCASTS
+</code></pre>
+<p>危险权限我们可以通过adb命令查看：</p>
+<pre><code>adb shell pm list permissions -d -g
+</code></pre><p>查看权限以及详细信息：</p>
+<pre><code>adb shell pm list permissions -d -g -f
+</code></pre><p>如果你申请某个危险的权限，假设你的app早已被用户授权了同一组的某个危险权限，那么系统会立即授权，而不需要用户去点击授权。比如你的app对READ_CONTACTS已经授权了，当你的app申请WRITE_CONTACTS时，系统会直接授权通过。此外，对于申请时弹出的dialog上面的文本说明也是对整个权限组的说明，而不是单个权限（ps:这个dialog是不能进行定制的）。</p>
+<h3 id="2-权限相关处理"><a href="#2-权限相关处理" class="headerlink" title="2. 权限相关处理"></a>2. 权限相关处理</h3><h4 id="2-1-添加权限"><a href="#2-1-添加权限" class="headerlink" title="2.1 添加权限"></a>2.1 添加权限</h4><p>在AndroidManifest.xml中正常添加权限。</p>
+<h4 id="2-2-检查权限"><a href="#2-2-检查权限" class="headerlink" title="2.2 检查权限"></a>2.2 检查权限</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">)</span><span class="token operator">!=</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+    <span class="token comment" spellcheck="true">// 申请权限         </span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>   
+    <span class="token comment" spellcheck="true">// 执行事件     </span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>这里涉及到一个API，ContextCompat.checkSelfPermission，主要用于检测某个权限是否已经被授予，方法返回值为PackageManager.PERMISSION_DENIED或者PackageManager.PERMISSION_GRANTED。当返回DENIED就需要进行申请授权了。这里的方法可以通过查看源码：</p>
+<pre class=" language-java"><code class="language-java">API源码：
+<span class="token comment" spellcheck="true">/**
+* Determine whether &lt;em>you&lt;/em> have been granted a particular permission.
+*    确定你是否获得了一个特定的权限
+*    
+* @param permission The name of the permission being checked.
+*  参数permission：你要检测的权限
+*
+* @return {@link android.content.pm.PackageManager#PERMISSION_GRANTED} if you have the
+* permission, or {@link android.content.pm.PackageManager#PERMISSION_DENIED} if not.
+*  返回值PackageManager.PERMISSION_GRANTED授权已成功
+*       PackageManager.PERMISSION_DENIED 授权被拒绝
+*
+* @see android.content.pm.PackageManager#checkPermission(String, String)
+*/</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">checkSelfPermission</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> Context context<span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> String permission<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>permission <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"permission is null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> context<span class="token punctuation">.</span><span class="token function">checkPermission</span><span class="token punctuation">(</span>permission<span class="token punctuation">,</span> android<span class="token punctuation">.</span>os<span class="token punctuation">.</span>Process<span class="token punctuation">.</span><span class="token function">myPid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Process<span class="token punctuation">.</span><span class="token function">myUid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>关于返回值，同样到源码里面可以查看：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * Permission check result: this is returned by {@link #checkPermission}
+* if the permission has been granted to the given package.
+*/</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> PERMISSION_GRANTED <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+* Permission check result: this is returned by {@link #checkPermission}
+* if the permission has not been granted to the given package.
+*/</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> PERMISSION_DENIED <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="2-3-申请权限"><a href="#2-3-申请权限" class="headerlink" title="2.3 申请权限"></a>2.3 申请权限</h4><pre class=" language-java"><code class="language-java">ActivityCompat<span class="token punctuation">.</span><span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">}</span><span class="token punctuation">,</span>MY_PERMISSIONS_REQUEST_CALL_PHONE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>该方法是异步的，第一个参数是Context；第二个参数是需要申请的权限的字符串数组；第三个参数为requestCode，主要用于回调的时候检测。</p>
+<h4 id="2-4-处理权限申请回调"><a href="#2-4-处理权限申请回调" class="headerlink" title="2.4 处理权限申请回调"></a>2.4 处理权限申请回调</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span><span class="token keyword">int</span> requestCode<span class="token punctuation">,</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> permissions<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> grantResults<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>requestCode <span class="token operator">==</span> MY_PERMISSIONS_REQUEST_CALL_PHONE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">callPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// Permission Denied</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">"Permission Denied"</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> grantResults<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>对于权限的申请结果，首先验证requestCode定位到你的申请，然后验证grantResults对应于申请的结果，这里的数组对应于申请时的第二个权限字符串数组。如果你同时申请两个权限，那么grantResults的length就为2，分别记录你两个权限的申请结果。</p>
+<h4 id="2-5-权限彻底禁止"><a href="#2-5-权限彻底禁止" class="headerlink" title="2.5 权限彻底禁止"></a>2.5 权限彻底禁止</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// Should we show an explanation?</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>ActivityCompat<span class="token punctuation">.</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>thisActivity<span class="token punctuation">,</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+    <span class="token comment" spellcheck="true">// Show an expanation to the user *asynchronously* -- don't block</span>
+    <span class="token comment" spellcheck="true">// this thread waiting for the user's response! After the user</span>
+    <span class="token comment" spellcheck="true">// sees the explanation, try again to request the permission.</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>当第一次向用户询问权限时，用户拒绝，而后再申请的弹窗会提示以后不再提示选项，如果用户勾选并拒绝权限，表示用户彻底拒绝权限，那么ActivityCompat.shouldShowRequestPermissionRationale将返回false，一般我们进行判断用户是彻底拒绝，那么想要再申请权限，可以提示用户到设置去修改。</p>
+<h3 id="3-总结过程"><a href="#3-总结过程" class="headerlink" title="3. 总结过程"></a>3. 总结过程</h3><ol>
+<li>检查权限是否被拒绝</li>
+<li>重新申请拒绝的权限</li>
+<li>重写权限回调的方法，并在方法中处理权限申请的结果。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> 面试题 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Socket通信过程]]></title>
+      <url>/2017/07/25/%E9%9D%A2%E8%AF%95%E9%A2%98_Socket%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<p>面试题 —— Socket通信过程</p>
+<p>关于网络，首先大家要了解一下网络的基本内容。</p>
+<p>网络如何通讯，首先要了解网络模型，当前最为广泛的模型有两种：OSI七层模型和TCP/IP四层模型。</p>
+<p><img src="http://i.imgur.com/m9udbb1.png" alt=""></p>
+<p>网络通讯的三个重点要素：</p>
+<ol>
+<li>IP地址：网络设备的标识</li>
+<li><p>端口号：用于标识进程的逻辑地址，有效端口：0–65535，其中0–1024为系统保留端口号</p>
+<p> 一台拥有IP地址的主机可以提供许多服务，比如Web服务、FTP服务、SMTP服务等，这些服务完全可以通    过1个IP地址来实现。那么，主机是怎样区分不同的网络服务呢？显然不能只靠IP地址，因为IP 地址与    网络服务的关系是一对多的关系。实际上是通过“IP地址+端口号”来区分不同的服务的。</p>
+</li>
+<li>传输协议：数据传输必须遵循的规则，常见网络协议：TCP、UDP</li>
+</ol>
+<h2 id="Socket介绍"><a href="#Socket介绍" class="headerlink" title="Socket介绍"></a>Socket介绍</h2><p>socket是对TCP、UDP协议的封装和应用，主要针对于程序员的(应用层面)，Socket本身并不是协议，而是一个调用接口(API)。通过Socket，我们才能使用TCP、UDP协议，简单的一个TCP/IP协议场景： 你要打电话给一个朋友，先拨号，朋友听到电话铃声后提起电话，这时你和你的朋友就建立起了连接，就可以讲话了。等交流结束，挂断电话结束此次交谈。</p>
+<p>Socket套接字，用于描述IP地址和端口号，是支持TCP/IP、UDP协议的网络通信的基本操作单元，是面向于客户端/服务器(C/S)模型而设计的，解决客户端和服务器通讯的问题。</p>
+<p>Socket基于TCP协议传输数据基本过程：</p>
+<ol>
+<li>创建Socket：指定地址和端口号，分为ClientSocket、ServerSocket。</li>
+<li>Socket连接：客户端和服务器端建立连接。</li>
+<li>打开Socket输入/输出流。</li>
+<li>对Socket进行读/写操作。</li>
+<li>关闭Socket。</li>
+</ol>
+<h2 id="案例实践"><a href="#案例实践" class="headerlink" title="案例实践"></a>案例实践</h2><p>我们通过Socket建立一个基于TCP协议的聊天的通讯过程。</p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>搭建服务端，我们简单的用一个java程序来搭建，运行开启即可。所以在AS中创建一个No Activity项目，建立一个类，创建main方法，在main方法中完成搭建，最后运行main方法即可。</p>
+<h4 id="1-创建服务端socke"><a href="#1-创建服务端socke" class="headerlink" title="1. 创建服务端socke"></a>1. 创建服务端socke</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//建立ServerSocket,指定服务器的端口号</span>
+    ServerSocket ss <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token number">4700</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//不断接收连接到此端口的socket</span>
+    <span class="token comment" spellcheck="true">// 并且为每一个socket开启一个线程，用于处理接收信息</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 获取连接到当前端口的所有socket</span>
+    Socket s <span class="token operator">=</span> ss<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"connect success!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 为每一个Socket开启线程</span>
+    <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ServerThread</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>我们在服务器端为每一个连接的Socket开新线程，处理信息，处理信息的内容，我们放置到一个特意创建的线程来处理接收的消息及返回消息给客户端。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServerThread</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> Socket mSocket <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> BufferedReader mBufferedReader <span class="token operator">=</span> null<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 构造函数中接收socket，并且初始化BufferedReader，用于读取客户端发送的消息</span>
+    <span class="token keyword">public</span> <span class="token function">ServerThread</span><span class="token punctuation">(</span>Socket socket<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
+        mSocket <span class="token operator">=</span> socket<span class="token punctuation">;</span>
+        mBufferedReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span>
+                <span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>mSocket<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            String content <span class="token operator">=</span> null<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//循环接收来自此客户端的消息</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>content <span class="token operator">=</span> mBufferedReader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">// 拿到连接的客户端socket的输出流，用于数据输出给客户端</span>
+                    OutputStream os <span class="token operator">=</span> mSocket<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment" spellcheck="true">// 当客户端发送bye，结束通话</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>content<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"bye"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        os<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"通话结束"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                        <span class="token comment" spellcheck="true">// 结束之后关闭流关闭客户端Socket</span>
+                        os<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        mSocket<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token comment" spellcheck="true">// 向客户端回应消息</span>
+                    os<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span>content <span class="token operator">+</span> <span class="token string">":来自服务器的返回。\n"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getByte</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SocketException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="2-打开Socket的输入-输出流"><a href="#2-打开Socket的输入-输出流" class="headerlink" title="2. 打开Socket的输入/输出流"></a>2. 打开Socket的输入/输出流</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 打开输入流</span>
+BufferedReader mBufferedReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span>
+            <span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>mSocket<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 打开输出流</span>
+OutputStream os <span class="token operator">=</span> mSocket<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>具体使用详见上述代码。</p>
+<h4 id="3-对Socket进行读写"><a href="#3-对Socket进行读写" class="headerlink" title="3. 对Socket进行读写"></a>3. 对Socket进行读写</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 读</span>
+String content <span class="token operator">=</span> mBufferedReader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 写</span>
+os<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span>content <span class="token operator">+</span> <span class="token string">":来自服务器的返回。\n"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="4-关闭Socket"><a href="#4-关闭Socket" class="headerlink" title="4. 关闭Socket"></a>4. 关闭Socket</h4><pre class=" language-java"><code class="language-java">mSocket<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>客户端创建正常Android项目即可。</p>
+<h4 id="1-创建并与服务器Socket建立连接"><a href="#1-创建并与服务器Socket建立连接" class="headerlink" title="1. 创建并与服务器Socket建立连接"></a>1. 创建并与服务器Socket建立连接</h4><p>建立连接通过端口号。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// ip地址本机地址，端口号要和服务端口号保持一致</span>
+Socket mClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Socket</span><span class="token punctuation">(</span><span class="token string">"192.168.1.36"</span><span class="token punctuation">,</span> <span class="token number">4700</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="2-打开Socket的输入-输出流-1"><a href="#2-打开Socket的输入-输出流-1" class="headerlink" title="2. 打开Socket的输入/输出流"></a>2. 打开Socket的输入/输出流</h4><pre class=" language-java"><code class="language-java">BufferedReader in <span class="token operator">=</span> null<span class="token punctuation">;</span>
+PrintWriter out <span class="token operator">=</span> null<span class="token punctuation">;</span>
+
+in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>mClient<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+out <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrintWriter</span><span class="token punctuation">(</span>mClient<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="3-对Socket进行读写操作"><a href="#3-对Socket进行读写操作" class="headerlink" title="3. 对Socket进行读写操作"></a>3. 对Socket进行读写操作</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 写入数据，传递到服务器</span>
+out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 读取到的服务器数据</span>
+String echo <span class="token operator">=</span> in<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="4-关闭Socket-1"><a href="#4-关闭Socket-1" class="headerlink" title="4. 关闭Socket"></a>4. 关闭Socket</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"bye"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>in <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> out <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        in<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mClient<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="Socket通信过程"><a href="#Socket通信过程" class="headerlink" title="Socket通信过程"></a>Socket通信过程</h2><p>总结过程：</p>
+<p><strong>服务器端：</strong></p>
+<ol>
+<li>创建一个ServerSocket，用于监听客户端Socket的连接请求</li>
+<li>采用循环不断接受来自客户端的请求</li>
+<li>每当接受到客户端Socket的请求，服务器端也对应产生一个Socket客户端</li>
+<li>IO流读写操作进行数据的传递</li>
+<li>关闭socket</li>
+</ol>
+<p><strong>客户端：</strong></p>
+<ol>
+<li>创建客户端socket(指定服务器端IP地址与端口号)</li>
+<li>连接(Android 创建Socket时会自动连接)</li>
+<li>与服务器端进行通信:IO流读写的操作</li>
+<li>关闭socket</li>
+</ol>
+<p><strong>附：其他常问面试题</strong></p>
+<blockquote>
+<p> TCP与UDP的区别？</p>
+</blockquote>
+<pre><code>UDP:
+将数据源和目的封装成数据包中，不需要建立连接
+每个数据包的大小在限制在 64k
+因无连接，是不可靠协议
+不需要建立连接，速度快
+
+TCP:
+通过三次握手完成连接，是可靠协议
+建立连接，形成传输数据的通道
+在连接中进行大数据量传输
+必须建立连接，效率会稍低
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> 面试题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 网络通信 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ORMLite数据库使用]]></title>
+      <url>/2017/06/20/%E9%9D%A2%E8%AF%95%E9%A2%98_ORMLite%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>面试题 —— ORMLite数据库使用流程及场景</p>
+<p>在项目开发中，我们常常会使用到数据库，一般数据库使用场景用于存储。在Android中主要使用SQLite数据库，但SQLite难免有些繁琐，所以我们采用ORMLite，简化使用。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="http://ormlite.com/" target="_blank" rel="external">官网</a></p>
+<p>ORM它的英文全称是Object Relational Mapping，是对象关系映射（Object Relational Mapping）的缩写，对象和关系数据是业务实体的两种表现形式，业务实体在内存中表现为对象，在数据库中表现为关系数据，ORM实现了对象和关系数据库之间的转换，简单来说，就是我们定义一个实体类，利用这个框架，它可以帮我们把这个实体映射到我们的数据库中，对应一个数据库表。</p>
+<blockquote>
+<p>ORMLite的优缺点：优点是使用简单，容易上手，封装完善；缺点是基于反射，效率较低</p>
+</blockquote>
+<h2 id="使用过程"><a href="#使用过程" class="headerlink" title="使用过程"></a>使用过程</h2><h3 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h3><p>根据ORMLite的官方使用说明，一般需要添加两个依赖：</p>
+<pre><code>compile &#39;com.j256.ormlite:ormlite-core:5.0&#39; // 这个包提供了JDBC和Android的核心功能包
+compile &#39;com.j256.ormlite:ormlite-android:5.0&#39; // 这个包提供了Android的特定功能
+</code></pre><h3 id="2-定义数据库的帮助类"><a href="#2-定义数据库的帮助类" class="headerlink" title="2. 定义数据库的帮助类"></a>2. 定义数据库的帮助类</h3><p>帮助类继承自OrmLiteSqliteOpenHelper，主要是帮助我们进行数据库表的创建和更新。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 继承自OrmLiteSqliteOpenHelper</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DBHelp</span> <span class="token keyword">extends</span> <span class="token class-name">OrmLiteSqliteOpenHelper</span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 数据库的名称</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String DB_NAME<span class="token operator">=</span><span class="token string">"repo_favorite.db"</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 数据库版本</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> VERSION <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> DBHelp dbHelp<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Context context<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 实现单例化</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> DBHelp <span class="token function">getInstance</span><span class="token punctuation">(</span>Context context<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dbHelp<span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            dbHelp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DBHelp</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">getApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> dbHelp<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token function">DBHelp</span><span class="token punctuation">(</span>Context context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> DB_NAME<span class="token punctuation">,</span> null<span class="token punctuation">,</span> VERSION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>context <span class="token operator">=</span> context<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// onCreate方法里面会进行数据库的创建，在这里面我们同时可以实现数据库表的创建及数据库表的数据填充</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>SQLiteDatabase database<span class="token punctuation">,</span> ConnectionSource connectionSource<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 对数据库的表进行更新，一般常用方法就是先删除，再创建。</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>SQLiteDatabase database<span class="token punctuation">,</span> ConnectionSource connectionSource<span class="token punctuation">,</span> <span class="token keyword">int</span> oldVersion<span class="token punctuation">,</span> <span class="token keyword">int</span> newVersion<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="3-创建数据库表"><a href="#3-创建数据库表" class="headerlink" title="3. 创建数据库表"></a>3. 创建数据库表</h3><p>在Android中利用ORMLite框架创建数据库表，是创建一个实体类，利用注解的方式表明其为数据库中的一张表，实体类里面的所有成员变量都可以设置为表中的字段，也是利用注解的方式来表明的。举个栗子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 在实体类的上面利用注解表明他是我们数据库里面的一张表，并设置表名。</span>
+<span class="token annotation punctuation">@DatabaseTable</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">"repostiory_group"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RepoGroup</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 这是个主键</span>
+    <span class="token annotation punctuation">@DatabaseField</span><span class="token punctuation">(</span>id <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@DatabaseField</span><span class="token punctuation">(</span>columnName <span class="token operator">=</span> <span class="token string">"NAME"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"RepoGroup{"</span> <span class="token operator">+</span>
+                <span class="token string">"id="</span> <span class="token operator">+</span> id <span class="token operator">+</span>
+                <span class="token string">", name='"</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">'}'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>常用注解说明：</p>
+<ol>
+<li>@DatabaseTable(tableName = “local_repo”)在实体类上面定义，表明这个实体类是数据库的一张表，并且可以利用tableName设置表名</li>
+<li>@DatabaseField 表明这个变量是数据库表里面的一个字段。里面涉及到几个内容：</li>
+</ol>
+<p><code>id=true</code>表明这个是一个主键，如果指定为generatedId，表示自动增长id，我们不需要给它赋值。</p>
+<p><code>columnName=&quot;&quot;</code>这个表示我们为其字段指定一个字段名，一般不指定的时候就是默认的变量名。</p>
+<p><code>foreign = true</code>表明是一个外键，就是关联了数据库中另外的一张表，这个字段的信息就是另外一张表里面的某一条信息。</p>
+</blockquote>
+<h3 id="4-定义数据库表的操作类"><a href="#4-定义数据库表的操作类" class="headerlink" title="4. 定义数据库表的操作类"></a>4. 定义数据库表的操作类</h3><p>数据库和表都有了之后，定义一个操作类DAO，对数据库里面的表进行操作：添、删、改、查的操作，需要注意的是，是定义一个表的操作类，所以表和表的操作类是一一对应的关系。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 某一表的操作类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RepoGroupDao</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 通过之前定义的数据库的帮助类来帮我们完成操作类的实例化</span>
+    <span class="token keyword">private</span> Dao<span class="token operator">&lt;</span>LocalRepo<span class="token punctuation">,</span>Long<span class="token operator">></span> dao<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">LocalRepoDao</span><span class="token punctuation">(</span>DBHelp dbHelp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            dao <span class="token operator">=</span> dbHelp<span class="token punctuation">.</span><span class="token function">getDao</span><span class="token punctuation">(</span>LocalRepo<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 添加和更新单条数据
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">createOrUpdate</span><span class="token punctuation">(</span>LocalRepo localRepo<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            dao<span class="token punctuation">.</span><span class="token function">createOrUpdate</span><span class="token punctuation">(</span>localRepo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 添加和更新多条数据
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">createOrUpdate</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>LocalRepo<span class="token operator">></span> list<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>LocalRepo localrepo<span class="token operator">:</span>list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">createOrUpdate</span><span class="token punctuation">(</span>localrepo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 删除某一条数据
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">delete</span><span class="token punctuation">(</span>LocalRepo localrepo<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            dao<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>localrepo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 修改某一条数据
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span>LocalRepo localrepo<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            dao<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>localrepo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 查询---根据条件查询（id查询）
+     */</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>LocalRepo<span class="token operator">></span> <span class="token function">queryForGroupId</span><span class="token punctuation">(</span><span class="token keyword">int</span> groupId<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> dao<span class="token punctuation">.</span><span class="token function">queryForEq</span><span class="token punctuation">(</span>LocalRepo<span class="token punctuation">.</span>COLUMN_GROUP_ID<span class="token punctuation">,</span>groupId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 查询---根据条件查询：利用where()方法来自定义查询
+     */</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>LocalRepo<span class="token operator">></span> <span class="token function">queryNoGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> dao<span class="token punctuation">.</span><span class="token function">queryBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>LocalRepo<span class="token punctuation">.</span>COLUMN_GROUP_ID<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 查询所有的数据
+     */</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>LocalRepo<span class="token operator">></span> <span class="token function">queryAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> dao<span class="token punctuation">.</span><span class="token function">queryForAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>上述代码中就是常用的增删改查的操作。</p>
+</blockquote>
+<h3 id="5-使用"><a href="#5-使用" class="headerlink" title="5. 使用"></a>5. 使用</h3><p>初始化DBHelp帮助类和DAO的操作类，即可以实现根据数据对数据库进行操作。</p>
+<h2 id="使用总结及场景"><a href="#使用总结及场景" class="headerlink" title="使用总结及场景"></a>使用总结及场景</h2><p><strong>使用流程总结及注意事项：</strong></p>
+<ol>
+<li>添加依赖</li>
+<li>数据库帮助类：帮我们完成数据库的创建及更新，注意点：数据库中做更新之后，不更改版本号，不会自动做数据库更新。</li>
+<li>数据库表：因为是对象关系映射，所以创建实体类作为表，注意点：一定要注解指定它是数据库表。</li>
+<li>数据库表操作类：对数据库表实现添删改查的操作，注意点：一个操作类Dao对应一个表，仅对一个表进行操作，是一对一的关系。</li>
+</ol>
+<p><strong>数据库使用场景：</strong></p>
+<p>数据存储：本地存储、本地收藏、浏览历史等。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 面试题 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ConstraintLayout的使用]]></title>
+      <url>/2017/06/13/%E9%9D%A2%E8%AF%95%E9%A2%98_ConstraintLayout%E7%BA%A6%E6%9D%9F%E5%B8%83%E5%B1%80%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>面试题 —— ConstraintLayout的使用</p>
+<h2 id="ConstraintLayout的介绍"><a href="#ConstraintLayout的介绍" class="headerlink" title="ConstraintLayout的介绍"></a>ConstraintLayout的介绍</h2><p>ConstraintLayout允许您使用平面视图层次结构创建大而复杂的布局（无嵌套视图组）。 它类似于RelativeLayout，因为所有View都依赖于兄弟控件和父控件之间的相对关系，但它比RelativeLayout更灵活，并且更易于与Android Studio的布局编辑器一起使用。</p>
+<p>ConstraintLayout的所有功能都可以直接从布局编辑器的可视化工具中获得，因为布局API和布局编辑器是专门为彼此构建的。 因此，您可以使用ConstraintLayout完全通过拖拽而不是编辑XML来构建布局。此外，ConstraintLayout可以兼容到Android 2.3(API9),所以不用担心兼容问题。</p>
+<p>想要在ConstraintLayout中定义一个View的位置，你至少需要添加两个约束：一个水平方向，一个竖直方向。当然，你可以添加更多的约束。<br>如果你没有指定某个方向上的约束，那么该View将会在坐标(0,0)或（x，0）或（0，y）处显示（这取决于你没有指定哪个方向的约束）。<br>如下图，View-C没有指定垂直方向的约束，虽然在预览时你看到的效果没有问题，但是运行后会发现，该View的显示坐标为（x，0）。 </p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/51447835-file_1491889558584_10c38.png" alt=""></p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/88330936-file_1491891998515_13982.png" alt=""></p>
+<h2 id="ConstraintLayout的使用"><a href="#ConstraintLayout的使用" class="headerlink" title="ConstraintLayout的使用"></a>ConstraintLayout的使用</h2><p>使用之前确保你的项目已经添加了ConstraintLayout的包。</p>
+<ol>
+<li>点击Tools–&gt; Android–&gt; SDK Manager.</li>
+<li>点击SDK Tools的选项.</li>
+<li>打开Support Repository 然后下载ConstraintLayout for Android 和 Solver for ConstraintLayout ，然后点击OK下载即可.</li>
+<li><p>添加依赖库到build.gradle里面，同步即可。</p>
+<p> compile ‘com.android.support.constraint:constraint-layout:1.0.2’</p>
+</li>
+</ol>
+<h3 id="创建ConstraintLayout布局"><a href="#创建ConstraintLayout布局" class="headerlink" title="创建ConstraintLayout布局"></a>创建ConstraintLayout布局</h3><p>将一个已存在的布局转换为ConstraintLayout布局。</p>
+<ol>
+<li>打开Android studio 的布局 –&gt; Design</li>
+<li>在Component Tree窗口，右键–&gt; Convert layout to ConstraintLayout.</li>
+</ol>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/25387273-file_1491896716651_f952.png" alt=""></p>
+<h3 id="添加布局约束"><a href="#添加布局约束" class="headerlink" title="添加布局约束"></a>添加布局约束</h3><p>当在ConstraintLayout中添加视图时，它会在每个角上显示一个带有方块调整大小句柄的边框，并在每一边显示圆形约束句柄。</p>
+<p>点击视图，然后单击并按住其中一个约束句柄并将该行拖动到可用的锚点（另一个视图的边缘，布局的边缘或指南）。</p>
+<p>创建约束时，请记住以下规则：</p>
+<ul>
+<li>每个视图必须至少有两个约束：一个水平和一个垂直。</li>
+<li>您只能在约束句柄和共享相同平面的锚点之间创建约束。 因此，视图的垂直平面（左侧和右侧）只能被约束到另一个垂直平面; 基线只能限制到其他基线。</li>
+<li>每个约束句柄只能用于一个约束，但您可以创建多个约束（从不同的视图）到相同的锚点。</li>
+</ul>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/34176905-file_1491898387081_110cc.png" alt=""></p>
+<p><strong>1. Parent position：</strong></p>
+<p>视图约束到布局的相应边缘。</p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/19361031-file_1491899150612_16ab0.png" alt=""></p>
+<p><strong>2. Order position：</strong></p>
+<p>定义两个视图的垂直或水平的外观位置。</p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/35344185-file_1491899226478_51b3.png" alt=""></p>
+<p><strong>3. Alignment</strong></p>
+<p>对齐约束条件：</p>
+<p>水平对齐约束：<br><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/82207525-file_1491899315070_dbf5.png" alt=""></p>
+<p>偏移对齐约束：<br><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/74974285-file_1491899383737_bf28.png" alt=""></p>
+<p><strong>4. Baseline alignment</strong></p>
+<p>基线对齐：视图文本对准另一个视图文本基线。</p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/77217259-file_1491899530538_1745e.png" alt=""></p>
+<p><strong>5. guideline</strong></p>
+<p>添加一个可以约束视图的参考线：水平和垂直。</p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/58918748-file_1491901994701_b0ab.png" alt=""></p>
+<h3 id="删除约束"><a href="#删除约束" class="headerlink" title="删除约束"></a>删除约束</h3><p>添加过约束之后，如果需要删除：</p>
+<p><strong>1. 删除控件单个约束条件：</strong></p>
+<p>将鼠标悬浮在某个约束的圆圈上，然后该圆圈会变成红色，这个时候单击一下就能删除了。</p>
+<p><strong>2. 删除控件所有约束：</strong></p>
+<p>删除某一个控件的所有约束，选中一个控件，然后它的左下角会出现一个删除约束的图标，点击该图标就能删除当前控件的所有约束了。</p>
+<p><strong>3. 删除当前布局所有约束：</strong></p>
+<p>删除当前界面中的所有约束，点击工具栏中的删除约束图标即可。</p>
+<h3 id="调整视图大小"><a href="#调整视图大小" class="headerlink" title="调整视图大小"></a>调整视图大小</h3><p>当选中任意一个控件的时候，在右侧的Properties区域就会出现很多的属性选项(当前展示的属性仅适用于约束布局):</p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/26245729-file_1491899900155_12c7d.png" width="50%"></p>
+<p><strong>图标①：</strong> 调整纵横比约束(视图大小的比例)。</p>
+<p><strong>图标②：</strong> 约束条件的删除。</p>
+<p><strong>图标③：</strong> 宽高的模式。</p>
+<ul>
+<li><img src="http://img.blog.csdn.net/20170131170403918">表示wrap content。</li>
+<li><img src="http://img.blog.csdn.net/20170131173104320"> 表示固定值，也就是给控件指定了一个固定的长度或者宽度值。</li>
+<li><img src="http://img.blog.csdn.net/20170131173220664"> 表示any size，它有点类似于match parent，但和match parent并不一样，是属于ConstraintLayout中特有的一种大小控制方式。</li>
+</ul>
+<p><strong>图标④：</strong> 边距约束条件。</p>
+<p><strong>图标⑤：</strong> 约束偏差的调整。</p>
+<h3 id="自动添加约束"><a href="#自动添加约束" class="headerlink" title="自动添加约束"></a>自动添加约束</h3><p>如果界面中的内容变得复杂起来，给每个控件一个个地添加约束也是一件很繁琐的事情。为此，ConstraintLayout中支持自动添加约束的功能，可以极大程度上简化那些繁琐的操作。</p>
+<p>自动添加约束的方式主要有两种：一种叫Autoconnect，一种叫Inference。</p>
+<p><strong>Autoconnect：</strong></p>
+<p><img src="http://img.blog.csdn.net/20170131203249059"></p>
+<p>默认情况下是关闭的，使用前先打开，在布局中添加一个视图，自动生成约束。</p>
+<p><img src="http://img.blog.csdn.net/20170131203642649"></p>
+<p>Autoconnect会判断我们的意图，并自动给控件添加约束。不过Autoconnect是无法保证百分百准确判断出我们的意图的，如果自动添加的约束并不是你想要的话，还可以在任何时候进行手动修改。总之，可以把它当成一个辅助工具，但不能完全靠它去添加控件的约束。</p>
+<p><strong>Inference：</strong></p>
+<p>Inference也是用于自动添加约束的，但它比Autoconnect的功能要更为强大，因为AutoConnect只能给当前操作的控件自动添加约束，而Inference会给当前界面中的所有元素自动添加约束。因而Inference比较适合用来实现复杂度比较高的界面，它可以一键自动生成所有的约束。</p>
+<p><img src="http://oo8dhx402.bkt.clouddn.com/17-4-11/32534465-file_1491903823400_165f1.png" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 面试题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 布局 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[事件分发的流程]]></title>
+      <url>/2017/05/22/%E9%9D%A2%E8%AF%95%E9%A2%98_%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%B5%81%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<p>面试题 —— 事件分发的流程</p>
+<p>事件分发是View的一个核心知识点，在开发中经常遇到滑动冲突，他的解决方式的理论基础就是事件分发机制。</p>
+<p>事件分发机制的流程是什么呢？首先认识一下事件分发的基本点。</p>
+<h2 id="1-事件的基本认知"><a href="#1-事件的基本认知" class="headerlink" title="1. 事件的基本认知"></a>1. 事件的基本认知</h2><h3 id="1-1-事件分发的对象："><a href="#1-1-事件分发的对象：" class="headerlink" title="1.1 事件分发的对象："></a>1.1 事件分发的对象：</h3><blockquote>
+<p>事件</p>
+</blockquote>
+<p>当用户触摸屏幕时（View或ViewGroup派生的控件），将产生点击事件（Touch事件）。</p>
+<p>Touch事件相关细节（发生触摸的位置、时间、历史记录、手势动作等）被封装成MotionEvent对象<br>主要发生的Touch事件有如下四种：</p>
+<blockquote>
+<p>MotionEvent.ACTION_DOWN：按下View（所有事件的开始）</p>
+<p>MotionEvent.ACTION_MOVE：滑动View</p>
+<p>MotionEvent.ACTION_CANCEL：非人为原因结束本次事件</p>
+<p>MotionEvent.ACTION_UP：抬起View（与DOWN对应）</p>
+</blockquote>
+<p>事件列：从手指接触屏幕至手指离开屏幕，这个过程产生的一系列事件<br>任何事件列都是以DOWN事件开始，UP事件结束，中间有无数的MOVE事件。</p>
+<h3 id="1-2-事件分发的本质"><a href="#1-2-事件分发的本质" class="headerlink" title="1.2 事件分发的本质"></a>1.2 事件分发的本质</h3><p>将点击事件（MotionEvent）向某个View进行传递并最终得到处理。</p>
+<p>即当一个点击事件发生后，系统需要将这个事件传递给一个具体的View去处理。这个事件传递的过程就是分发过程。</p>
+<h3 id="1-3-事件在哪些对象之间进行传递"><a href="#1-3-事件在哪些对象之间进行传递" class="headerlink" title="1.3 事件在哪些对象之间进行传递"></a>1.3 事件在哪些对象之间进行传递</h3><p>一个点击事件产生后，传递顺序是：Activity（Window） -&gt; ViewGroup -&gt; View<br>Android的UI界面是由Activity、ViewGroup、View及其派生类组合而成的。</p>
+<h3 id="1-4-事件分发过程由哪些方法协作完成"><a href="#1-4-事件分发过程由哪些方法协作完成" class="headerlink" title="1.4 事件分发过程由哪些方法协作完成"></a>1.4 事件分发过程由哪些方法协作完成</h3><p>dispatchTouchEvent() 、onInterceptTouchEvent()和onTouchEvent()</p>
+<blockquote>
+<p>dispatchTouchEvent()</p>
+</blockquote>
+<p>用来进行事件的分发。如果事件能够传递给当前的View，那么此方法一定会被调用，，返回值受到当前View的onTouchEvent和下级的dispatchTouchEvent()方法的影响，表示是否消费当前的事件。</p>
+<blockquote>
+<p>onInterceptTouchEvent()</p>
+</blockquote>
+<p>在dispatchTouchEvent内部调用，用来判断是否拦截某一事件，返回结果表示是否拦截当前的事件。如果当前View拦截了某个事件，那么在同一个事件序列中，此方法不会被再次调用。</p>
+<blockquote>
+<p>onTouchEvent()</p>
+</blockquote>
+<p>在dispatchTouchEvent方法中调用，用来处理点击事件，返回结果表示是否消费当前事件，如果不消费，那么同一个事件列的其他事件，当前View无法再次接收。</p>
+<p>默认状态下会一直向下传递，传递给最后的View，然后View来消费事件。</p>
+<h2 id="2-事件分发流程"><a href="#2-事件分发流程" class="headerlink" title="2. 事件分发流程"></a>2. 事件分发流程</h2><p>根据上述事件分发的三个方法，使用代码说明流程可以简单如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 点击事件产生后，会直接调用dispatchTouchEvent（）方法</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">dispatchTouchEvent</span><span class="token punctuation">(</span>MotionEvent ev<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//代表是否消耗事件</span>
+    <span class="token keyword">boolean</span> consume <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">onInterceptTouchEvent</span><span class="token punctuation">(</span>ev<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//如果onInterceptTouchEvent()返回true则代表当前View拦截了点击事件</span>
+        <span class="token comment" spellcheck="true">//则该点击事件则会交给当前View进行处理</span>
+        <span class="token comment" spellcheck="true">//即调用onTouchEvent (）方法去处理点击事件</span>
+        consume <span class="token operator">=</span> <span class="token function">onTouchEvent</span> <span class="token punctuation">(</span>ev<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//如果onInterceptTouchEvent()返回false则代表当前View不拦截点击事件</span>
+        <span class="token comment" spellcheck="true">//则该点击事件则会继续传递给它的子元素</span>
+        <span class="token comment" spellcheck="true">//子元素的dispatchTouchEvent（）就会被调用，重复上述过程</span>
+        <span class="token comment" spellcheck="true">//直到点击事件被最终处理为止</span>
+        consume <span class="token operator">=</span> child<span class="token punctuation">.</span><span class="token function">dispatchTouchEvent</span> <span class="token punctuation">(</span>ev<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> consume<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>具体的分发流程，可以参见下图：</p>
+<p><img src="http://i.imgur.com/FHnkJej.png" alt=""></p>
+<p><strong>dispatchTouchEvent()</strong></p>
+<ol>
+<li>默认情况：根据当前对象的不同而返回方法不同<pre class=" language-java"><code class="language-java"><span class="token number">1</span><span class="token punctuation">)</span>Activity    
+<span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">dispatchTouchEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
+即调用父类ViewGroup的<span class="token function">dispatchTouchEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">2</span><span class="token punctuation">)</span>ViewGroup    
+<span class="token function">onIntercepTouchEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
+即调用自身的<span class="token function">onIntercepTouchEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">3</span><span class="token punctuation">)</span>View    
+onTouchEvent（）    
+即调用自身的onTouchEvent（）
+</code></pre>
+</li>
+<li>返回true<pre><code>消费事件
+事件不会往下传递
+后续事件（Move、Up）会继续分发到该View
+</code></pre></li>
+<li>返回false<pre><code>不消费事件
+事件不会往下传递
+将事件回传给父控件的onTouchEvent()处理
+Activity例外：返回false=消费事件
+</code></pre></li>
+</ol>
+<p><strong>onTouchEvent()</strong></p>
+<ol>
+<li>返回true<pre><code>自己处理（消费）该事情
+事件停止传递
+该事件序列的后续事件（Move、Up）让其处理；
+</code></pre></li>
+<li>返回false（同默认实现：调用父类onTouchEvent()）<pre><code>不处理（消费）该事件
+事件往上传递给父控件的onTouchEvent()处理
+当前View不再接受此事件列的其他事件（Move、Up）；
+</code></pre></li>
+</ol>
+<p><strong>onInterceptTouchEvent()</strong></p>
+<ol>
+<li>返回true<pre><code>拦截事件
+事件不会向下传递
+自己处理事件，即执行自己的onTouchEvent()
+统一事件列的其他事件都直接由该View处理，但同一事件列此方法不再调用
+</code></pre></li>
+<li>返回false<pre><code>不拦截事件
+事件继续向下传递
+事件传递到子View，调用View.dispatchTouchEvent()方法处理
+仍然接收此事件列的其他事件
+</code></pre></li>
+</ol>
+<h2 id="3-场景实践"><a href="#3-场景实践" class="headerlink" title="3. 场景实践"></a>3. 场景实践</h2><p>我们采用一个场景来理解一下分发的流程。</p>
+<p>首先，模拟一个场景：</p>
+<p><img src="http://i.imgur.com/ipbwMlO.png" alt=""></p>
+<p>分别创建View、ViewGroup，搭建场景，然后重写里面事件分发的方法，根据打印日志，了解分发的流程。</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">dispatchTouchEvent</span><span class="token punctuation">(</span>MotionEvent event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">getAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_DOWN<span class="token operator">:</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[dispatchTouchEvent] -> ACTION_DOWN"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_MOVE<span class="token operator">:</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[dispatchTouchEvent] -> ACTION_MOVE"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_UP<span class="token operator">:</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[dispatchTouchEvent] -> ACTION_UP"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_CANCEL<span class="token operator">:</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[dispatchTouchEvent] -> ACTION_CANCEL"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">boolean</span> superReturn <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">dispatchTouchEvent</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Log<span class="token punctuation">.</span><span class="token function">i</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[dispatchTouchEvent] return "</span> <span class="token operator">+</span> superReturn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> superReturn<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onInterceptTouchEvent</span><span class="token punctuation">(</span>MotionEvent event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">getAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_DOWN<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onInterceptTouchEvent] -> ACTION_DOWN"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_MOVE<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onInterceptTouchEvent] -> ACTION_MOVE"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_UP<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onInterceptTouchEvent] -> ACTION_UP"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_CANCEL<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onInterceptTouchEvent] -> ACTION_CANCEL"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">boolean</span> superReturn <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onInterceptTouchEvent</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Log<span class="token punctuation">.</span><span class="token function">i</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onInterceptTouchEvent] return "</span> <span class="token operator">+</span> superReturn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> superReturn<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onTouchEvent</span><span class="token punctuation">(</span>MotionEvent event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token function">getAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_DOWN<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onTouchEvent] -> ACTION_DOWN"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_MOVE<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onTouchEvent] -> ACTION_MOVE"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_UP<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onTouchEvent] -> ACTION_UP"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> MotionEvent<span class="token punctuation">.</span>ACTION_CANCEL<span class="token operator">:</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onTouchEvent] -> ACTION_CANCEL"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">boolean</span> superReturn <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onTouchEvent</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Log<span class="token punctuation">.</span><span class="token function">i</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"[onTouchEvent] return "</span> <span class="token operator">+</span> superReturn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> superReturn<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>可以分别修改相应的返回值，查看具体的流程。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 面试题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 事件(Touch) </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[MarkDown专用版破解方法]]></title>
       <url>/2016/07/01/MarkDown%E4%B8%93%E7%94%A8%E7%89%88%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95/</url>
       <content type="html"><![CDATA[<p>使用下面的邮箱和授权秘钥破解MarkDown专用版</p>
