@@ -730,10 +730,20 @@ compile &#39;com.j256.ormlite:ormlite-android:5.0&#39; // 这个包提供了Andr
 </nav>
 
 			
-			<!-- UY BEGIN -->
-			<div id="uyan_frame" class="mdl-card mdl-cell mdl-cell--12-col" style="padding:8px"></div>
-			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2142997"></script>
-			<!-- UY END -->
+			<div id="gitmentContainer" class="mdl-card mdl-cell mdl-cell--12-col" style="padding:8px"></div>
+			<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+			<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+			<script>
+				var gitment = new Gitment({
+					owner: 'LuckyXiang',
+					repo: 'LuckyXiang.github.io',
+					oauth: {
+						client_id: '71eb0151f27c5f31dc2d',
+						client_secret: '65a18ea170ca83c85b43015b2ca8264e26209ba7',
+					},
+				});
+				gitment.render('gitmentContainer');
+			</script>
         </div>
 	</script>
 
