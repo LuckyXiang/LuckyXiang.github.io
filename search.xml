@@ -3,6 +3,45 @@
   
     
     <entry>
+      <title><![CDATA[Git忽略规则及.gitignore规则不生效的解决办法]]></title>
+      <url>/2018/01/16/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8A.gitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+      <content type="html"><![CDATA[<h2 id="Git忽略规则"><a href="#Git忽略规则" class="headerlink" title="Git忽略规则"></a>Git忽略规则</h2><p>在git中如果想忽略掉某个文件，不想对这个文件做版本库控制；可以使用修改根目录中 <strong>.gitignore</strong> 文件。</p>
+<blockquote>
+<p>如果没有 <strong>.gitignore</strong> 文件，可自己手动建立此文件</p>
+</blockquote>
+<p><strong>.gitignore</strong> 文件每一行保存了一个匹配的规则，例如：</p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">*</span><span class="token punctuation">.</span>o       # 忽略所有 <span class="token punctuation">.</span><span class="token number">0</span> 结尾的文件
+<span class="token operator">*</span><span class="token punctuation">.</span><span class="token punctuation">[</span>oa<span class="token punctuation">]</span>    # 支持通配符<span class="token punctuation">,</span>过滤repo中所有以<span class="token punctuation">.</span>o或者<span class="token punctuation">.</span>a为扩展名的文件
+<span class="token operator">!</span>lib<span class="token punctuation">.</span>a    # <span class="token operator">!</span>开头表示不过滤
+<span class="token operator">/</span>TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir<span class="token operator">/</span>TODO
+<span class="token operator">/</span>build<span class="token operator">/</span>   # 过滤文件设置，表示过滤这个文件夹
+build<span class="token operator">/</span>    # 忽略 build<span class="token operator">/</span> 目录下的所有文件
+doc<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">.</span>txt # 会忽略 doc<span class="token operator">/</span>notes<span class="token punctuation">.</span>txt 但不包括 doc<span class="token operator">/</span>server<span class="token operator">/</span>的其它<span class="token punctuation">.</span>txt文件
+</code></pre>
+<p>git忽略规则很简单，不需做过多解释.</p>
+<h2 id="gitignore文件规则不生效的解决办法"><a href="#gitignore文件规则不生效的解决办法" class="headerlink" title=".gitignore文件规则不生效的解决办法"></a>.gitignore文件规则不生效的解决办法</h2><p>有时候在项目开发过程中，突然有新的需求想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是<strong>.gitignore只能忽略那些原来没有被track的文件</strong>，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：</p>
+<pre class=" language-java"><code class="language-java">git rm <span class="token operator">-</span>r <span class="token operator">--</span>cached <span class="token punctuation">.</span>
+git add <span class="token punctuation">.</span>
+git commit <span class="token operator">-</span>m <span class="token string">'update .gitignore'</span>
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tools </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Android 布局优化]]></title>
       <url>/2017/08/09/%E9%9D%A2%E8%AF%95%E9%A2%98_Android%20%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</url>
       <content type="html"><![CDATA[<p>面试题 —— Android 布局优化</p>
@@ -989,8 +1028,8 @@ Activity例外：返回false=消费事件
       <content type="html"><![CDATA[<p>使用下面的邮箱和授权秘钥破解MarkDown专用版</p>
 <p><strong>邮箱：</strong> soar360@live.com</p>
 <p><strong>授权秘钥：</strong></p>
-<p>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==</p>
-]]></content>
+<pre><code>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==
+</code></pre>]]></content>
       
         <categories>
             
