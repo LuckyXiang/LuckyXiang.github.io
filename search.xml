@@ -3,6 +3,53 @@
   
     
     <entry>
+      <title><![CDATA[Android中防止Toast重复显示]]></title>
+      <url>/2018/01/23/Android%E4%B8%AD%E9%98%B2%E6%AD%A2Toast%E9%87%8D%E5%A4%8D%E6%98%BE%E7%A4%BA/</url>
+      <content type="html"><![CDATA[<p>Android中防止Toast重复显示</p>
+<h3 id="开发实景"><a href="#开发实景" class="headerlink" title="开发实景"></a>开发实景</h3><p>在开发过程中，我们经常会用到Toast来提示消息。但我们经常会遇到这样一个情况：当点击某个控件会弹出Toast时，如果直接使用Toast.makeText()的方式的话，会发现在我们不断点击的情况下，Toast会地不断地显示，直到点击的次数的Toast出现完毕为止，这样就会降低了用户对软件的体验。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用”自定义Toast”，当然这里的自定义不是对Toast继承再自定义，使用工具类做一个简单的封装。</p>
+<p>话不多说，直接上代码：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ToastUtils</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Toast mToast<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span>Context context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mToast <span class="token operator">=</span> Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> null<span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token keyword">int</span> resId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mToast<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>resId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mToast<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span>CharSequence charSequence<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mToast<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>charSequence<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mToast<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>使用上面代码多次触发也只显示一个toast，只是把toast的内容替换成最新一次触发需要显示的内容。</p>
+</blockquote>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在使用时，可以在应用的<strong>Application</strong>里做初始化，如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span> 
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ToastUtils<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Git忽略规则及.gitignore规则不生效的解决办法]]></title>
       <url>/2018/01/16/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8A.gitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
       <content type="html"><![CDATA[<h2 id="Git忽略规则"><a href="#Git忽略规则" class="headerlink" title="Git忽略规则"></a>Git忽略规则</h2><p>在git中如果想忽略掉某个文件，不想对这个文件做版本库控制；可以使用修改根目录中 <strong>.gitignore</strong> 文件。</p>
@@ -981,6 +1028,30 @@ Activity例外：返回false=消费事件
     </entry>
     
     <entry>
+      <title><![CDATA[MarkDown专用版破解方法]]></title>
+      <url>/2016/07/01/MarkDown%E4%B8%93%E7%94%A8%E7%89%88%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>使用下面的邮箱和授权秘钥破解MarkDown专用版</p>
+<p><strong>邮箱：</strong> soar360@live.com</p>
+<p><strong>授权秘钥：</strong></p>
+<pre><code>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tools </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[解决Android Studio引用远程仓库(JCenter)下载慢]]></title>
       <url>/2016/07/01/%E8%A7%A3%E5%86%B3android%20studio%E5%BC%95%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%85%A2(JCenter%E4%B8%8B%E8%BD%BD%E6%85%A2)/</url>
       <content type="html"><![CDATA[<h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><p>使用开源中国的maven库<a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="external">阿里云的(速度巨快)</a></p>
@@ -1017,30 +1088,6 @@ Activity例外：返回false=消费事件
         <tags>
             
             <tag> Android </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[MarkDown专用版破解方法]]></title>
-      <url>/2016/07/01/MarkDown%E4%B8%93%E7%94%A8%E7%89%88%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95/</url>
-      <content type="html"><![CDATA[<p>使用下面的邮箱和授权秘钥破解MarkDown专用版</p>
-<p><strong>邮箱：</strong> soar360@live.com</p>
-<p><strong>授权秘钥：</strong></p>
-<pre><code>GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Tools </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Tools </tag>
             
         </tags>
         
